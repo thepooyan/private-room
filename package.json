@@ -2,7 +2,7 @@
   "name": "example-with-unocss",
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev & pocketbase serve",
+    "dev": "vinxi dev & cd pb; pocketbase serve",
     "build": "vinxi build",
     "start": "vinxi start"
   },
