@@ -1,7 +1,6 @@
 import PocketBase from "pocketbase"
 import { post, user } from "./interface";
-import { createResource } from "solid-js";
-import { clearDelegatedEvents } from "solid-js/web";
+import { createResource, Resource } from "solid-js";
 const pb = new PocketBase('http://127.0.0.1:8090');
 export default pb
 
@@ -20,7 +19,7 @@ export const newPost = async (msg: string) => {
 
 const getAllPosts = () => POSTS.getFullList(expandUser)
 
-export const getLivePostsResource = () => {
+export const getLivePostsResource = ():Resource<post[]> => {
   const [signal, {mutate}] = createResource(getAllPosts)
 
   POSTS.subscribe("*", (e) => {
@@ -35,7 +34,7 @@ export const getLivePostsResource = () => {
         break;
     }
   }, expandUser)
-  return [ signal, mutate ]
+  return signal  
 }
 
 export const removePost = async (recordId: string) => {

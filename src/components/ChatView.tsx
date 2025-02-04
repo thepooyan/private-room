@@ -3,7 +3,7 @@ import Post from "./Post";
 import { getLivePostsResource } from "../utility/backend";
 
 const ChatView = () => {
-  let [ posts, mutatePosts ] = getLivePostsResource()
+  let posts = getLivePostsResource()
 
   return (
     <>
