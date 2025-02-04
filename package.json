@@ -10,6 +10,7 @@
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.11",
     "@unocss/reset": "^0.65.1",
+    "eventsource": "^3.0.5",
     "pocketbase": "^0.25.1",
     "solid-js": "^1.9.2",
     "unocss": "^0.65.1",
