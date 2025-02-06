@@ -10,9 +10,13 @@
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.11",
     "@unocss/reset": "^0.65.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "eventsource": "^3.0.5",
     "pocketbase": "^0.25.1",
     "solid-js": "^1.9.2",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
     "unocss": "^0.65.1",
     "vinxi": "^0.4.3"
   },
