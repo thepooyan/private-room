@@ -1,13 +1,14 @@
+import ChatInput from "~/components/ChatInput";
 import ChatView from "~/components/ChatView";
-// import {clientOnly} from "@solidjs/start"
+import NavBar from "~/components/Layout/NavBar";
 
 export default function Home() {
 
-  // let C = clientOnly(() => import("~/components/Layout/NavBar"))
-
   return (
     <>
+      <NavBar/>
       <ChatView/>
+      <ChatInput/>
     </>
   );
 }

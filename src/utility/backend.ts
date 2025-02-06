@@ -1,15 +1,9 @@
 import PocketBase from "pocketbase"
 import { post, user } from "./interface";
 import { createResource, Resource } from "solid-js";
-import { isServer } from "solid-js/web";
-import { EventSource } from "eventsource";
 
-const pb = (() => {
-  if ( isServer ) {
-    global.EventSource = EventSource;
-  }
-  return new PocketBase('http://127.0.0.1:8090')
-})()
+const pb = new PocketBase('http://127.0.0.1:8090')
+
 export default pb
 
 const POSTS = pb.collection<post>('posts')
