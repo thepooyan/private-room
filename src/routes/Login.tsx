@@ -19,6 +19,7 @@ const Login = () => {
 
   return (
     <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
+      <h1 class=" text-center text-2xl font-bold mb-4">Login</h1>
       <TextField>
         <TextFieldLabel>Public key</TextFieldLabel>
         <TextFieldInput placeholder="Enter your Public key:" ref={publicRef}/>
