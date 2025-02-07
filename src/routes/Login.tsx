@@ -1,9 +1,11 @@
+import { Button } from "~/components/ui/button"
+
 const Login = () => {
   return (
     <form>
       <input placeholder="Public key"/>
       <input placeholder="Private key"/>
-      <button>Login</button>
+      <Button>Login</Button>
     </form>
   )
 }
