@@ -2,7 +2,7 @@ import { STYLES } from "../styles/style"
 
 const EditProfile = () => {
   return (
-    <button class={STYLES.button}>EditProfile</button>
+    <button class={STYLES.old_button}>EditProfile</button>
   )
 }
 

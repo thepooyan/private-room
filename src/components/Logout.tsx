@@ -7,7 +7,7 @@ const Logout = () => {
   }
   return (
     <div onclick={logout}
-      class={STYLES.button}
+      class={STYLES.old_button}
     >Logout</div>
   )
 }

@@ -1,7 +1,9 @@
+import { A } from "@solidjs/router"
 import { createSignal } from "solid-js"
 import Spinner from "~/components/mine/Spinner"
 import { Button } from "~/components/ui/button"
 import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
+import { STYLES } from "~/styles/style"
 
 const Login = () => {
 
@@ -18,7 +20,7 @@ const Login = () => {
   }
 
   return (
-    <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
+    <form class="w-sm flex flex-col gap-2 justify-center h-dvh m-auto ">
       <h1 class=" text-center text-2xl font-bold mb-4">Login</h1>
       <TextField>
         <TextFieldLabel>Public key</TextFieldLabel>
@@ -28,9 +30,14 @@ const Login = () => {
         <TextFieldLabel>Private key</TextFieldLabel>
         <TextFieldInput placeholder="Enter your Private key:" ref={privateRef}/>
       </TextField>
+      <br/>
       <Button onclick={login} disabled={isLoading()}>
         {isLoading() ? <Spinner/> : "Login"}
       </Button>
+      <p class="text-center">
+        Don't have a key pair? signup
+        <A href="/Signup" class={STYLES.link}> here!</A>
+      </p>
     </form>
   )
 }
