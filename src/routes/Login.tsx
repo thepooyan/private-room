@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js"
+import Spinner from "~/components/mine/Spinner"
 import { Button } from "~/components/ui/button"
 import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
 
@@ -26,8 +27,8 @@ const Login = () => {
         <TextFieldLabel>Private key</TextFieldLabel>
         <TextFieldInput placeholder="Enter your Private key:" ref={privateRef}/>
       </TextField>
-      <Button onclick={login}>
-        {isLoading() ? "..." : "Login"}
+      <Button onclick={login} disabled={isLoading()}>
+        {isLoading() ? <Spinner/> : "Login"}
       </Button>
     </form>
   )
