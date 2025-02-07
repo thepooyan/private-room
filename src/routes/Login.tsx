@@ -33,20 +33,19 @@ const Login = () => {
       </Alert>
       <br/>
       <TextField>
-        <TextFieldLabel>Public key</TextFieldLabel>
-        <TextFieldInput placeholder="Enter your Public key:" ref={publicRef}/>
+        <TextFieldLabel>Public key:</TextFieldLabel>
+        <TextFieldInput placeholder="Enter your Public key" ref={publicRef}/>
       </TextField>
       <TextField>
-        <TextFieldLabel>Private key</TextFieldLabel>
-        <TextFieldInput placeholder="Enter your Private key:" ref={privateRef}/>
+        <TextFieldLabel>Private key:</TextFieldLabel>
+        <TextFieldInput placeholder="Enter your Private key" ref={privateRef}/>
       </TextField>
       <br/>
       <Button onclick={login} disabled={isLoading()}>
         {isLoading() ? <Spinner/> : "Login"}
       </Button>
       <p class="text-center">
-        Don't have a key pair? signup
-        <A href="/Signup"> here!</A>
+        Don't have a key pair? signup <A href="/Signup">here!</A>
       </p>
     </form>
   )
