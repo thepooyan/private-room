@@ -1,21 +1,19 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((app) => {
-  const collection = app.findCollectionByNameOrId("3nbhna8s1ubgjxw")
+  const collection = app.findCollectionByNameOrId("pbc_2605467279")
 
   // update collection data
   unmarshal({
-    "createRule": "@request.auth.id != \"\"",
-    "viewRule": ""
+    "createRule": ""
   }, collection)
 
   return app.save(collection)
 }, (app) => {
-  const collection = app.findCollectionByNameOrId("3nbhna8s1ubgjxw")
+  const collection = app.findCollectionByNameOrId("pbc_2605467279")
 
   // update collection data
   unmarshal({
-    "createRule": null,
-    "viewRule": null
+    "createRule": null
   }, collection)
 
   return app.save(collection)

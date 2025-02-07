@@ -74,10 +74,8 @@ export async function checkKeysMatch(
   return decryptedMessage === testMessage;
 }
 
-export async function exportCryptoKey(
-  cryptoKey: CryptoKey,
-): Promise<ArrayBuffer> {
-  return crypto.subtle.exportKey("spki", cryptoKey);
+export async function exportCryptoKey(cryptoKey: CryptoKey): Promise<JsonWebKey> {
+  return crypto.subtle.exportKey("jwk", cryptoKey);
 }
 export async function importCryptoKey(base64Key: string): Promise<CryptoKey> {
   const keyData = base64ToArrayBuffer(base64Key);
