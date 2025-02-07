@@ -27,7 +27,7 @@ const Signup = () => {
 
   return (
     <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
-      <h1 class=" text-center text-3xl font-bold mb-3">Signup</h1>
+      <h1 class=" text-center text-3xl font-bold mb-3">Sign-up</h1>
       <TextField>
         <TextFieldLabel>Username:</TextFieldLabel>
         <TextFieldInput placeholder="Find a uniqe username" ref={nameRef} class={`${error() && "border-red"}`} onblur={checkUsername}/>
