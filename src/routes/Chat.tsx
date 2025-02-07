@@ -1,9 +1,7 @@
-import ChatView from "~/components/ChatView"
-
 const Chat = () => {
   return (
     <>
-      <ChatView/>
+
     </>
   )
 }

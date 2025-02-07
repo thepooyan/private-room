@@ -14,15 +14,15 @@ export default defineConfig({
   // If you want to extract them, use the following configuration.
   // It's necessary to add the following configuration if you use shadcn-vue or shadcn-svelte.
 
-  // content: {
-  //   pipeline: {
-  //     include: [
-  //       // the default
-  //       /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
-  //       // include js/ts files
-  //       '(components|src)/**/*.{js,ts}',
-  //     ],
-  //   },
-  // },
+  content: {
+    pipeline: {
+      include: [
+        // the default
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+        // include js/ts files
+        '(components|src)/**/*.{js,ts}',
+      ],
+    },
+  },
 
 })
