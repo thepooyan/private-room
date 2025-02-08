@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase"
-import { post, user } from "./interface";
+import { post } from "./interface";
 import { createResource, Resource } from "solid-js";
 
 const pb = new PocketBase('http://127.0.0.1:8090')
@@ -41,10 +41,4 @@ export const getLivePostsResource = ():Resource<post[]> => {
 
 export const removePost = async (recordId: string) => {
   return await POSTS.delete(recordId)
-}
-
-export const getAvatar = (userRecord: user | null ) => {
-  if (userRecord === null) return "http://localhost:8090/default-user.jpeg"
-  let url = pb.files.getURL(userRecord, userRecord.avatar) 
-  return url === "" ? "http://localhost:8090/default-user.jpeg" : url
 }
