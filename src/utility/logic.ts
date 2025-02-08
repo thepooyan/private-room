@@ -1,7 +1,6 @@
 import { ClientResponseError } from "pocketbase";
 import pb from "./backend";
 import { exportCryptoKey, generateRSAKeyPair } from "./crypto";
-import { localUser } from "./interface";
 import { user } from "./signal";
 
 export const createNewUser = async (username: string) => {
