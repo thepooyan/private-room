@@ -6,15 +6,16 @@ interface pbResponse {
   updated: string;
 }
 export interface user extends pbResponse {
-  avatar: string;
-  email: string;
-  emailVisibility: boolean;
-  role: "admin" | "user";
-  username: string;
-  verified: boolean;
+  public_key: string
+  username: string
 }
 export interface post extends pbResponse {
   content: string;
   user: string;
   expand?: {user: user}
+}
+export interface localUser {
+  username: string,
+  public_key: CryptoKey,
+  private_key: CryptoKey,
 }
