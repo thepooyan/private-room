@@ -1,9 +1,8 @@
 import { useNavigate } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { isError } from "vinxi/http";
 import A from "~/components/mine/A";
 import Spinner from "~/components/mine/Spinner";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   TextField,
@@ -29,7 +28,7 @@ const Signup = () => {
     }
     await createNewUser(username)
     setIsLoading(false);
-    // navigate("/Chat")
+    navigate("/Chat")
   };
 
   const checkUsername = async () => {
