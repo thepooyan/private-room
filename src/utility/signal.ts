@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { localUser } from "./interface";
+import { contact, localUser } from "./interface";
 import { storage } from "./utility";
 
 const userStorage = new storage<localUser>("user")
@@ -17,3 +17,5 @@ const logout = () => {
 }
 
 export const user = {signal, login, logout}
+
+export const [currentChat, setCurrentChat] =  createSignal<contact | null>(null)

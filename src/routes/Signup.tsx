@@ -1,5 +1,5 @@
 import { useNavigate } from "@solidjs/router";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import A from "~/components/mine/A";
 import Spinner from "~/components/mine/Spinner";
 import { Alert, AlertDescription } from "~/components/ui/alert";
@@ -10,11 +10,16 @@ import {
   TextFieldLabel,
 } from "~/components/ui/text-field";
 import { createNewUser, usernameExists } from "~/utility/logic";
+import { user } from "~/utility/signal";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = createSignal(false);
   const [error, setError] = createSignal<string | null>(null);
   const navigate = useNavigate()
+  createEffect(() => {
+    if (user.signal() !== null) navigate("/Chat")
+  })
+
 
   let nameRef!: HTMLInputElement;
 
