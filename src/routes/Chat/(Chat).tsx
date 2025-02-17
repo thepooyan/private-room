@@ -1,6 +1,8 @@
 const Chat = () => {
   return (
-    <div>default page</div>
+    <div class="bg-blue-400 w-full flex justify-center items-center">
+      Select one contact to continue
+    </div>
   )
 }
 

@@ -5,7 +5,7 @@ import ContactPreview from "./ContactPreview"
 const ContactList = () => {
   let contacts = contanctStorage.get()
   return (
-    <div>
+    <div class="">
       <Show when={contacts}>
         <For each={contacts}>
           {c => <ContactPreview contact={c}/>}

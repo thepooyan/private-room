@@ -3,10 +3,12 @@ import Avatar from "../chat/Avatar";
 import { Show } from "solid-js";
 import { Button } from "../ui/button";
 
+export const navHeight = 25
+
 const UserNav = () => {
   return (
     <Show when={user.signal()}>
-      {user => <div class=" px-5 p-2 bg-gray-200 flex justify-between items-center mb-4">
+      {user => <div class={ ` px-5 p-2 bg-gray-200 flex justify-between items-center grid-col-span-full ` }>
         <div class=" inline-flex flex-col items-center w-max ">
           <Avatar username={user().username} />
           {user().username}
