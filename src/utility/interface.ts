@@ -19,3 +19,8 @@ export interface localUser {
   public_key: JsonWebKey,
   private_key: JsonWebKey,
 }
+
+export interface contact {
+  username: string,
+  public_key: JsonWebKey
+}

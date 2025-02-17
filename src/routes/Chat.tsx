@@ -1,10 +1,13 @@
+import { RouterProps } from "@solidjs/router"
+import ContactList from "~/components/chat/contactList"
 import { user } from "~/utility/signal"
 
-const Chat = () => {
+const Chat = ({children}:RouterProps) => {
   return (
     <>
       username: {user.signal()?.username}
-      {user.signal()?.public_key}
+      <ContactList/>
+      {children}
     </>
   )
 }

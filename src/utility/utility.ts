@@ -1,3 +1,5 @@
+import { contact, localUser } from "./interface";
+
 export class storage<T extends object> {
   private key: string
   constructor(key: string) {
@@ -14,4 +16,10 @@ export class storage<T extends object> {
   clear() {
     localStorage.removeItem(this.key);
   }
+}
+
+export const contanctStorage = new storage<contact[]>("contacts")
+
+export const getAvatar = () => {
+  // https://api.dicebear.com/9.x/pixel-art/svg?seed=Felix
 }
