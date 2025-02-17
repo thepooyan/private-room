@@ -19,7 +19,3 @@ export class storage<T extends object> {
 }
 
 export const contanctStorage = new storage<contact[]>("contacts")
-
-export const getAvatar = () => {
-  // https://api.dicebear.com/9.x/pixel-art/svg?seed=Felix
-}
