@@ -1,4 +1,13 @@
-import { createQuery } from "@tanstack/solid-query"
+import { createQuery, QueryClientConfig } from "@tanstack/solid-query"
+
+export const queryConfig:QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      gcTime: 1000 * 60 * 5, // 5 min
+      staleTime: Infinity,
+    }
+  }
+}
 
 
 export const fetchAvatar = async (key: string) => {
