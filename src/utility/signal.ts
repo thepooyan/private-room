@@ -1,30 +1,19 @@
 import { createSignal } from "solid-js";
 import { localUser } from "./interface";
+import { storage } from "./utility";
 
-const persist = {
-  get: () => {
-    let d = localStorage.getItem("user")
-    if (d === null) return null
-    return JSON.parse(d) as localUser
-  },
-  set: (user: localUser) => {
-    localStorage.setItem("user", JSON.stringify(user))
-  },
-  clear: () => {
-    localStorage.removeItem("user")
-  }
-}
+const userStorage = new storage<localUser>("user")
 
-const [signal, setSignal] = createSignal<localUser | null>(persist.get())
+const [signal, setSignal] = createSignal<localUser | null>(userStorage.get())
 
 const login = (user: localUser) => {
   setSignal(user)
-  persist.set(user)
+  userStorage.save(user)
 }
 
 const logout = () => {
   setSignal(null)
-  persist.clear()
+  userStorage.clear()
 }
 
 export const user = {signal, login, logout}
