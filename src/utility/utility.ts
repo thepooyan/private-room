@@ -1,4 +1,4 @@
-import { contact, localUser } from "./interface";
+import { contact } from "./interface";
 
 export class storage<T extends object> {
   private key: string

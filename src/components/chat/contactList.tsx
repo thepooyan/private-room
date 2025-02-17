@@ -1,5 +1,6 @@
 import { For, Show } from "solid-js"
 import { contanctStorage } from "~/utility/utility"
+import ContactPreview from "./ContactPreview"
 
 const ContactList = () => {
   let contacts = contanctStorage.get()
@@ -7,9 +8,7 @@ const ContactList = () => {
     <div>
       <Show when={contacts}>
         <For each={contacts}>
-          {c => <>
-            {c.username}
-          </>}
+          {c => <ContactPreview contact={c}/>}
         </For>
       </Show>
     </div>
