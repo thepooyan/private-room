@@ -8,12 +8,12 @@ export const navHeight = 25
 const UserNav = () => {
   return (
     <Show when={user.signal()}>
-      {user => <div class={ ` px-5 p-2 bg-gray-200 flex justify-between items-center grid-col-span-full ` }>
+      {u => <div class={ ` px-5 p-2 bg-gray-200 flex justify-between items-center grid-col-span-full ` }>
         <div class=" inline-flex flex-col items-center w-max ">
-          <Avatar username={user().username} />
-          {user().username}
+          <Avatar username={u().username} />
+          {u().username}
         </div>
-        <Button class="">Logout</Button>
+        <Button onclick={() => user.logout()}>Logout</Button>
       </div>}
     </Show>
   );
