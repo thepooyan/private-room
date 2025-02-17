@@ -7,9 +7,9 @@ interface props {
 const ContactPreview = ({contact}:props) => {
   let avatar = avatarQuery(contact.username)
   return (
-    <div>
+    <div class="flex items-center gap-2 ">
       <div innerHTML={avatar.data}
-        class="w-20"
+        class="w-15 bg-gray rounded-full overflow-hidden"
       ></div>
       <p>{contact.username}</p>
     </div>
