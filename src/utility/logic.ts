@@ -13,10 +13,12 @@ export const createNewUser = async (username: string) => {
   };
   try {
     await pb.collection("users").create(newData)
+    const privateJWK = await exportCryptoKey(privateKey);
+
     user.login({
       username: username,
-      public_key: publicKey,
-      private_key: privateKey,
+      public_key: publicJWK,
+      private_key: privateJWK,
     })
   } catch(e) {
     throw new Error("??")

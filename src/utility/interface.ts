@@ -16,6 +16,6 @@ export interface post extends pbResponse {
 }
 export interface localUser {
   username: string,
-  public_key: CryptoKey,
-  private_key: CryptoKey,
+  public_key: JsonWebKey,
+  private_key: JsonWebKey,
 }
