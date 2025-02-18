@@ -1,18 +1,14 @@
 import { ClientResponseError } from "pocketbase";
-import pb from "./backend";
 import { exportCryptoKey, generateRSAKeyPair } from "./crypto";
 import { user } from "./signal";
+import { api } from "./backend";
 
 export const createNewUser = async (username: string) => {
   const {publicKey, privateKey} = await generateRSAKeyPair();
   const publicJWK = await exportCryptoKey(publicKey);
 
-  const newData = {
-    "username": username,
-    "public_key": JSON.stringify(publicJWK),
-  };
   try {
-    await pb.collection("users").create(newData)
+    await api.users.new(username, JSON.stringify(publicJWK))
     const privateJWK = await exportCryptoKey(privateKey);
 
     user.login({
@@ -27,8 +23,7 @@ export const createNewUser = async (username: string) => {
 
 export const usernameExists = async (username: string):Promise<boolean> => {
   {
-    return pb.collection("users")
-      .getFirstListItem(`username = "${username}"`)
+    return api.users.findByUsername(username)
       .then(() => {
         return true
       })

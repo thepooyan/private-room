@@ -1,16 +1,17 @@
-import pb from "~/utility/backend"
 import { AiFillPlusCircle } from 'solid-icons/ai'
 import { Iuser } from "~/utility/interface"
 import { contanctStorage } from "~/utility/utility"
 import { reloadContacts } from "./contactList"
+import { api } from '~/utility/backend'
 
 const AddContact = () => {
   const add = async () => {
     let pk = prompt("Public key of the guy:")
     let trg: Iuser;
+    if (!pk) return 
 
     try {
-     trg = await pb.collection<Iuser>("users").getFirstListItem(`public_key='${pk}'`)
+     trg = await api.users.findByPK(pk)
     } catch(e) {
       return alert("User not found!")
     }

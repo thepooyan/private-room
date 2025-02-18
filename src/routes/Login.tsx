@@ -5,9 +5,8 @@ import Spinner from "~/components/mine/Spinner"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
 import { Button } from "~/components/ui/button"
 import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
-import pb from "~/utility/backend"
+import { api } from "~/utility/backend"
 import { checkKeysMatch, importCryptoKey } from "~/utility/crypto"
-import { Iuser } from "~/utility/interface"
 import { user } from "~/utility/signal"
 
 const Login = () => {
@@ -30,7 +29,7 @@ const Login = () => {
       let match = await checkKeysMatch(pbk, prk)
       if (!match) throw new Error("Keys don't match")
 
-      let res = await pb.collection<Iuser>("users").getFirstListItem(`public_key='${pbs}'`)
+      let res = await api.users.findByPK(pbs)
       user.login({username: res.username, public_key: res.public_key as JsonWebKey, private_key: prs as JsonWebKey})
       navigate("/Chat")
 
