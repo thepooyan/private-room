@@ -5,14 +5,14 @@ interface pbResponse {
   created: string;
   updated: string;
 }
-export interface user extends pbResponse {
+export interface Iuser extends pbResponse {
   public_key: string
   username: string
 }
 export interface post extends pbResponse {
   content: string;
   user: string;
-  expand?: {user: user}
+  expand?: {user: Iuser}
 }
 export interface localUser {
   username: string,

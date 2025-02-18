@@ -1,22 +1,46 @@
+import { useNavigate } from "@solidjs/router"
 import { createSignal } from "solid-js"
 import A from "~/components/mine/A"
 import Spinner from "~/components/mine/Spinner"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
 import { Button } from "~/components/ui/button"
 import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
+import pb from "~/utility/backend"
+import { checkKeysMatch, importCryptoKey } from "~/utility/crypto"
+import { Iuser } from "~/utility/interface"
+import { user } from "~/utility/signal"
 
 const Login = () => {
 
   const [isLoading, setIsLoading] = createSignal(false)
+  const navigate = useNavigate()
 
   let publicRef!: HTMLInputElement
   let privateRef!: HTMLInputElement
 
   const login = async () => {
     setIsLoading(true)
-    console.log(publicRef.value, privateRef.value)
-    await new Promise((res) => setTimeout(res, 3000))
-    setIsLoading(false)
+    let pbs = publicRef.value
+    let prs = privateRef.value
+    
+    try {
+      let pbk = await importCryptoKey(pbs)
+      let prk = await importCryptoKey(prs)
+
+      let match = await checkKeysMatch(pbk, prk)
+      if (!match) throw new Error("Keys don't match")
+
+      let res = await pb.collection<Iuser>("users").getFirstListItem(`public_key='${pbs}'`)
+      user.login({username: res.username, public_key: res.public_key as JsonWebKey, private_key: prs as JsonWebKey})
+      navigate("/Chat")
+
+    } catch(e) {
+      return alert(e)
+    } finally {
+      setIsLoading(false)
+      publicRef.value = ""
+      privateRef.value = ""
+    }
   }
 
   return (

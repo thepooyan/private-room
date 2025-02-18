@@ -77,19 +77,40 @@ export async function checkKeysMatch(
 export async function exportCryptoKey(cryptoKey: CryptoKey): Promise<JsonWebKey> {
   return crypto.subtle.exportKey("jwk", cryptoKey);
 }
-export async function importCryptoKey(base64Key: string): Promise<CryptoKey> {
-  const keyData = base64ToArrayBuffer(base64Key);
+export async function importCryptoKey(jwkString: string): Promise<CryptoKey> {
+  try {
+    const jwk = JSON.parse(jwkString);
 
-  const importedKey = await crypto.subtle.importKey(
-    "spki",
-    keyData,
-    {
+    if (jwk.kty !== "RSA") {
+      throw new Error("Key type must be RSA for RSA-OAEP.");
+    }
+
+    const algorithm = {
       name: "RSA-OAEP",
-      hash: "SHA-256",
-    },
-    true,
-    ["encrypt"],
-  );
+      hash: "SHA-256", // Or other hash algorithm like "SHA-1", "SHA-512"
+    };
 
-  return importedKey;
+    // Determine key usages.  Default to encrypt/decrypt if not specified.
+    let keyUsages: KeyUsage[] = [];
+    if (jwk.use === "enc") {
+      keyUsages = ["encrypt", "decrypt"];
+    } else if (jwk.key_ops && jwk.key_ops.length > 0) {
+      keyUsages = jwk.key_ops as KeyUsage[];
+    } else {
+      keyUsages = ["encrypt", "decrypt"]; // Default for RSA-OAEP
+    }
+
+    const cryptoKey = await crypto.subtle.importKey(
+      "jwk",
+      jwk,
+      algorithm,
+      true, // extractable
+      keyUsages
+    );
+
+    return cryptoKey;
+  } catch (error) {
+    console.error("Error importing RSA-OAEP JWK:", error);
+    throw new Error(`Failed to import RSA-OAEP JWK: ${error}`);
+  }
 }
