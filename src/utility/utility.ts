@@ -33,7 +33,7 @@ export class arrayStorage<T extends object> {
     return new Set(s ? JSON.parse(s) : [])
   }
   saveData() {
-    localStorage.setItem(this.key, JSON.stringify(this.data))
+    localStorage.setItem(this.key, JSON.stringify(Array.from(this.data)))
   }
   add(item: T) {
     this.data.add(item)
