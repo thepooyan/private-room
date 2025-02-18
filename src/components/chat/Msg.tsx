@@ -1,9 +1,9 @@
 import clsx from "clsx"
 
 interface props {
-  isRightSide: boolean
+  isRightSide?: boolean
 }
-const Msg = ({isRightSide = false}) => {
+const Msg = ({isRightSide = false}:props) => {
   return (
     <div class={clsx(
       "bg-teal-200 w-max p-2 mb-4 rounded ",
