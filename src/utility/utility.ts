@@ -10,7 +10,10 @@ export class storage<T extends object> {
     if (d === null) return null;
     return JSON.parse(d) as T;
   }
-  save(object: T) {
+  save(object: T | ((prev: T | null) => T)) {
+    if (typeof object === "function") {
+      object = object(this.get())
+    }
     localStorage.setItem(this.key, JSON.stringify(object));
   }
   clear() {

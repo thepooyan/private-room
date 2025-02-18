@@ -1,13 +1,18 @@
-import { For, Show } from "solid-js"
+import { createSignal, For, Show } from "solid-js"
 import { contanctStorage } from "~/utility/utility"
 import ContactPreview from "./ContactPreview"
+import AddContact from "./AddContact"
 
+let [contacts, setContacts] = createSignal(contanctStorage.get())
+export const reloadContacts = () => {
+  setContacts(contanctStorage.get())
+}
 const ContactList = () => {
-  let contacts = contanctStorage.get()
   return (
     <div class="">
-      <Show when={contacts}>
-        <For each={contacts}>
+      <AddContact/>
+      <Show when={contacts()}>
+        <For each={contacts()}>
           {c => <ContactPreview contact={c}/>}
         </For>
       </Show>
