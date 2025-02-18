@@ -1,13 +1,14 @@
 import { Show } from "solid-js";
+import ChatBox from "~/components/chat/ChatBox";
 import { currentChat } from "~/utility/signal";
 
 const Chat = () => {
   return (
     <>
-      <div class="bg-blue-400 w-full flex justify-center items-center">
+      <div class="  w-full flex justify-center items-center border-1 border-gray-500">
         <Show when={!currentChat()}>Select one contact to continue</Show>
         <Show when={currentChat()}>{c => <>
-          {c().username}
+          <ChatBox c={c()}/>
         </>}</Show>
       </div>
     </>
