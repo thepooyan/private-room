@@ -1,8 +1,8 @@
 import { createSignal } from "solid-js";
 import { contact, localUser } from "./interface";
-import { storage } from "./utility";
+import { objectStorage } from "./utility";
 
-const userStorage = new storage<localUser>("user")
+const userStorage = new objectStorage<localUser>("user")
 
 const [signal, setSignal] = createSignal<localUser | null>(userStorage.get())
 
