@@ -1,4 +1,5 @@
 import pb from "~/utility/backend"
+import { AiFillPlusCircle } from 'solid-icons/ai'
 import { user } from "~/utility/interface"
 import { contanctStorage } from "~/utility/utility"
 import { reloadContacts } from "./contactList"
@@ -18,10 +19,12 @@ const AddContact = () => {
     reloadContacts()
   }
   return (
-    <button
-      onclick={add}
-      class="bg-gray-300 w-5 h-5 rounded-full flex justify-center items-center font-bold "
-    >+</button>
+    <>
+      <AiFillPlusCircle
+        class="text-gray-400 hover:text-gray-500 cursor-pointer w-5 h-5 rounded-full flex justify-center items-center font-bold mx-auto my-2 "
+        onclick={add}
+      />
+    </>
   )
 }
 
