@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import { Icontact, IlocalUser } from "./interface";
-import { objectStorage } from "./utility";
+import { contanctStorage, objectStorage } from "./utility";
+import { reloadContacts } from "~/components/chat/contactList";
 
 const userStorage = new objectStorage<IlocalUser>("user")
 
@@ -14,6 +15,8 @@ const login = (user: IlocalUser) => {
 const logout = () => {
   setSignal(null)
   userStorage.clear()
+  contanctStorage.clear()
+  reloadContacts()
 }
 
 export const user = {signal, login, logout}
