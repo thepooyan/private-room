@@ -1,13 +1,18 @@
+import { api } from "~/utility/backend";
 import { Button } from "../ui/button";
 import { TextField, TextFieldInput } from "../ui/text-field";
+import { currentChat } from "~/utility/signal";
 
 const ChatInput = () => {
 
-  let inputRef:HTMLInputElement | undefined;
+  let inputRef!:HTMLInputElement;
 
-  const submitHandler = (e:SubmitEvent) => {
+  const submitHandler = async (e:SubmitEvent) => {
     e.preventDefault()
-    inputRef!.value = ""
+    let trg = currentChat()
+    if (!trg) throw new Error("No active chat")
+    await api.messages.send(trg, inputRef.value)
+    inputRef.value = ""
   }
 
   let disabled = () => false

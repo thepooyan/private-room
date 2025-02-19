@@ -21,6 +21,16 @@ export const api = {
     }
   },
   messages: {
+    send: (to: Icontact, content: string) => {
+      let sig = user.signal()
+      if (!sig) throw new Error("User not logged in")
+      let me = sig.id
+      return pb_msg.create({
+        sender: me,
+        reciever: to.id,
+        content: content
+      })
+    },
     getAll: (c: Icontact) => {
       let sig = user.signal()
       if (!sig) throw new Error("User not logged in")
@@ -30,6 +40,19 @@ export const api = {
     },
     getLiveResource: (c: Icontact) => {
       const [signal, {mutate}] = createResource(() => api.messages.getAll(c))
+
+      pb_msg.subscribe("*", (e) => {
+        switch (e.action) {
+          case "create":
+            let newMsg = e.record;
+            mutate(prev => prev ? {...prev, items: [...prev.items, newMsg]} : undefined)
+            break;
+          case "delete":
+            // let wasPost = e.record;
+            // mutate(pst => pst ? [...pst.filter(i => i.id !== wasPost.id)] : undefined)
+            // break;
+        }
+      })
 
       return [signal,mutate]
     }
