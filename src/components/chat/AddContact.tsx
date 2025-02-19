@@ -16,7 +16,7 @@ const AddContact = () => {
       return alert("User not found!")
     }
 
-    contanctStorage.add({username: trg.username, public_key: trg.public_key as JsonWebKey})
+    contanctStorage.add({username: trg.username, public_key: trg.public_key as JsonWebKey, id: trg.id})
     reloadContacts()
   }
   return (

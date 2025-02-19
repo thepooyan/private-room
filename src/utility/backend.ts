@@ -1,6 +1,7 @@
 import PocketBase from "pocketbase"
 import { Icontact, Imessage, Iuser } from "./interface";
 import { createResource } from "solid-js";
+import { user } from "./signal";
 
 const pb = new PocketBase('http://127.0.0.1:8090')
 
@@ -21,7 +22,11 @@ export const api = {
   },
   messages: {
     getAll: (c: Icontact) => {
-      return pb_msg.getList(1, 50, {filter: `(sender = "474810qviokp647" && reciever = "633b98x9d17wi44") || (sender = "633b98x9d17wi44" && reciever = "474810qviokp647")`})
+      let sig = user.signal()
+      if (!sig) throw new Error("User not logged in")
+      let me = sig.id
+      let him = c.id
+      return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
     getLiveResource: (c: Icontact) => {
       const [signal, {mutate}] = createResource(() => api.messages.getAll(c))

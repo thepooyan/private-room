@@ -14,7 +14,7 @@ const ChatView = ({c}:props) => {
   return (
     <div class="p-5 px-7">
       <Show when={msgs()}>
-        {c => <For each={c().items}>{i => <Msg>{i.content}</Msg>}</For>}
+        {ms => <For each={ms().items}>{i => <Msg isRightSide={i.sender !== c.id}>{i.content}</Msg>}</For>}
       </Show>
       <Show when={!msgs()}>
         "No messages yet!"
