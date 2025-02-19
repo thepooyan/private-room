@@ -10,9 +10,12 @@ interface props {
   contact: Icontact
 }
 const ContactPreview = ({contact}:props) => {
-  const deleteMe = () => {
+  const deleteMe = (e:MouseEvent) => {
+    e.stopPropagation()
     contanctStorage.remove(contact)
     reloadContacts()
+    if (currentChat()?.id === contact.id)
+      setCurrentChat(null)
   }
   return (
     <div class={clsx(`flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-gray-300 p-2 transition-colors `, currentChat() === contact && "bg-gray-200")}
