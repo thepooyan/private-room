@@ -19,7 +19,7 @@ const ContactPreview = ({contact}:props) => {
   }
   return (
     <div class={clsx(`flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-gray-300 p-2 transition-colors `, currentChat() === contact && "bg-gray-200")}
-      onclick={() => setCurrentChat(contact)}>
+      onclick={() => { setCurrentChat(contact)}}>
       <AiOutlineDelete size={34}  class="text-red hover:bg-red-200 rounded-full p-1  " onclick={deleteMe}/>
       <Avatar username={contact.username}/>
       <p>{contact.username}</p>

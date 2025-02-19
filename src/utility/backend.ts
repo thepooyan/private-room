@@ -41,6 +41,7 @@ export const api = {
     getLiveResource: (c: Icontact) => {
       const [signal, {mutate}] = createResource(() => api.messages.getAll(c))
 
+      pb_msg.unsubscribe("*")
       pb_msg.subscribe("*", (e) => {
         switch (e.action) {
           case "create":
@@ -54,7 +55,7 @@ export const api = {
         }
       })
 
-      return [signal,mutate]
+      return { signal  }
     }
   }
 }
