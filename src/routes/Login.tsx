@@ -30,7 +30,7 @@ const Login = () => {
       if (!match) throw new Error("Keys don't match")
 
       let res = await api.users.findByPK(pbs)
-      user.login({username: res.username, public_key: res.public_key as JsonWebKey, private_key: prs as JsonWebKey})
+      user.login({username: res.username, public_key: res.public_key as JsonWebKey, private_key: prs as JsonWebKey, id: res.id})
       navigate("/Chat")
 
     } catch(e) {

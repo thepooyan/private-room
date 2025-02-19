@@ -18,6 +18,7 @@ export interface IlocalUser {
   username: string,
   public_key: JsonWebKey,
   private_key: JsonWebKey,
+  id: string
 }
 export interface Icontact {
   username: string,

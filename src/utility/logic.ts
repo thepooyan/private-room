@@ -8,13 +8,14 @@ export const createNewUser = async (username: string) => {
   const publicJWK = await exportCryptoKey(publicKey);
 
   try {
-    await api.users.new(username, JSON.stringify(publicJWK))
+    let res = await api.users.new(username, JSON.stringify(publicJWK))
     const privateJWK = await exportCryptoKey(privateKey);
 
     user.login({
       username: username,
       public_key: publicJWK,
       private_key: privateJWK,
+      id: res.id
     })
   } catch(e) {
     throw new Error("??")
