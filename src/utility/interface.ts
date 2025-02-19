@@ -9,18 +9,17 @@ export interface Iuser extends pbResponse {
   public_key: string
   username: string
 }
-export interface post extends pbResponse {
-  content: string;
-  user: string;
-  expand?: {user: Iuser}
+export interface Imessage extends pbResponse {
+  content: string,
+  sender: string,
+  reciever: string,
 }
-export interface localUser {
+export interface IlocalUser {
   username: string,
   public_key: JsonWebKey,
   private_key: JsonWebKey,
 }
-
-export interface contact {
+export interface Icontact {
   username: string,
   public_key: JsonWebKey
 }

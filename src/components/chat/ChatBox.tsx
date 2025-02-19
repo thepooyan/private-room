@@ -1,14 +1,14 @@
-import { contact } from "~/utility/interface"
+import { Icontact } from "~/utility/interface"
 import ChatInput from "./ChatInput"
 import ChatView from "./ChatView"
 
 interface props {
-  c: contact
+  c: Icontact
 }
 const ChatBox = ({c}:props) => {
   return (
     <>
-      <ChatView/>
+      <ChatView c={c}/>
       <ChatInput/>
     </>
   )

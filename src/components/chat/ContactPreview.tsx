@@ -1,4 +1,4 @@
-import { contact } from "~/utility/interface"
+import { Icontact } from "~/utility/interface"
 import { AiOutlineDelete } from 'solid-icons/ai'
 import Avatar from "./Avatar"
 import { currentChat, setCurrentChat } from "~/utility/signal"
@@ -7,7 +7,7 @@ import { contanctStorage } from "~/utility/utility"
 import { reloadContacts } from "./contactList"
 
 interface props {
-  contact: contact
+  contact: Icontact
 }
 const ContactPreview = ({contact}:props) => {
   const deleteMe = () => {

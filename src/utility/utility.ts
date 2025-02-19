@@ -1,4 +1,4 @@
-import { contact } from "./interface";
+import { Icontact } from "./interface";
 
 export class objectStorage<T extends object> {
   private key: string
@@ -52,7 +52,7 @@ export class arrayStorage<T extends object> {
   }
 }
 
-export const contanctStorage = new arrayStorage<contact>("contacts")
+export const contanctStorage = new arrayStorage<Icontact>("contacts")
 
 export async function copyToClipboard(text: string): Promise<void> {
     if (!navigator.clipboard) {
