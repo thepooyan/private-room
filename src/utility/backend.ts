@@ -1,6 +1,6 @@
 import PocketBase from "pocketbase"
 import { Icontact, Imessage, Iuser } from "./interface";
-import { Accessor, createResource } from "solid-js";
+import { Accessor, createEffect, createResource } from "solid-js";
 import { user } from "./signal";
 import { createQuery } from "@tanstack/solid-query";
 
@@ -40,31 +40,32 @@ export const api = {
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
     getLiveResource: (c: Accessor<Icontact>) => {
-      const [signal, {mutate}] = createResource(c,() => messageQuery(c()))
 
-      pb_msg.unsubscribe("*")
-      pb_msg.subscribe("*", (e) => {
-        switch (e.action) {
-          case "create":
-            let newMsg = e.record;
-            // mutate(prev => prev ? {...prev, data: {items}} : undefined)
-            break;
-          case "delete":
-            // let wasPost = e.record;
-            // mutate(pst => pst ? [...pst.filter(i => i.id !== wasPost.id)] : undefined)
-            // break;
-        }
-      })
+      const signal = messageQuery(c)
 
-      return { signal  }
+      // pb_msg.unsubscribe("*")
+      // pb_msg.subscribe("*", (e) => {
+      //   switch (e.action) {
+      //     case "create":
+      //       let newMsg = e.record;
+      //       // mutate(prev => prev ? {...prev, data: {items}} : undefined)
+      //       break;
+      //     case "delete":
+      //       // let wasPost = e.record;
+      //       // mutate(pst => pst ? [...pst.filter(i => i.id !== wasPost.id)] : undefined)
+      //       // break;
+      //   }
+      // })
+
+      return { signal }
     }
   }
 }
 
-export const messageQuery = (contact: Icontact) => {
+export const messageQuery = (contact: Accessor<Icontact>) => {
   return createQuery(() => ({
-    queryKey: [contact.id],
-    queryFn: () => api.messages.getAll(contact),
+    queryKey: [contact().id],
+    queryFn: () => api.messages.getAll(contact()),
     staleTime: 2000
   }))
 }
