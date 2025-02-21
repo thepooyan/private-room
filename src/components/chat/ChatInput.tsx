@@ -1,7 +1,7 @@
-import { api } from "~/utility/backend";
 import { Button } from "../ui/button";
 import { TextField, TextFieldInput } from "../ui/text-field";
 import { currentChat } from "~/utility/signal";
+import { messagesMutation } from "~/utility/queries";
 
 const ChatInput = () => {
 
@@ -10,8 +10,10 @@ const ChatInput = () => {
   const submitHandler = async (e:SubmitEvent) => {
     e.preventDefault()
     let trg = currentChat()
+    let value = inputRef.value
     if (!trg) throw new Error("No active chat")
-    await api.messages.send(trg, inputRef.value)
+    let {mutateAsync} = messagesMutation(trg, value)
+    await mutateAsync()
     inputRef.value = ""
   }
 

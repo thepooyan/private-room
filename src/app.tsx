@@ -7,8 +7,9 @@ import { Suspense } from "solid-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { queryConfig } from "./utility/queries";
 
+export let qc = new QueryClient(queryConfig);
+
 export default function App() {
-  let qc = new QueryClient(queryConfig);
 
   return (
     <QueryClientProvider client={qc}>

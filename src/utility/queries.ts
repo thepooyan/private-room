@@ -1,4 +1,7 @@
-import { createQuery, QueryClientConfig } from "@tanstack/solid-query"
+import { createMutation, createQuery, QueryClientConfig } from "@tanstack/solid-query"
+import { Icontact } from "./interface"
+import { api } from "./backend"
+import { qc } from "~/app"
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -19,4 +22,13 @@ export const avatarQuery = (key: string) => {
     queryKey: ["avatar", key],
     queryFn: () => fetchAvatar(key),
   }))
+}
+
+export const messagesMutation = (to: Icontact, content: string) => {
+  return createMutation(() => ({
+    mutationFn: () => api.messages.send(to, content),
+    onSuccess: () => {
+      qc.invalidateQueries({queryKey: ["msgs", to.id]})
+    }
+  }), () => qc)
 }
