@@ -27,8 +27,9 @@ export const avatarQuery = (key: string) => {
 export const messagesMutation = (to: Icontact) => {
   return createMutation(() => ({
     mutationFn: (msg: string) => api.messages.send(to, msg),
-    onSuccess: () => {
+    onSettled: () => {
       qc.invalidateQueries({queryKey: ["msgs", to.id]})
-    }
+    },
+    mutationKey: ["mutateMsgs", to.id]
   }), () => qc)
 }

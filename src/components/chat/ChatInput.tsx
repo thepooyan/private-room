@@ -7,12 +7,13 @@ const ChatInput = () => {
 
   let inputRef!:HTMLInputElement;
 
+  let trg = currentChat()
+  if (!trg) throw new Error("No active chat")
+  let {mutateAsync} = messagesMutation(trg)
+
   const submitHandler = async (e:SubmitEvent) => {
     e.preventDefault()
-    let trg = currentChat()
-    if (!trg) throw new Error("No active chat")
-    let {mutateAsync} = messagesMutation(trg)
-    await mutateAsync(inputRef.value)
+    mutateAsync(inputRef.value)
     inputRef.value = ""
   }
 
