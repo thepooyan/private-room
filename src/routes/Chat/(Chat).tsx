@@ -17,7 +17,7 @@ const Chat = () => {
         <Show when={currentChat()}>
           {(c) => (
             <>
-              <ChatBox c={c()} />
+              <ChatBox c={c} />
             </>
           )}
         </Show>
