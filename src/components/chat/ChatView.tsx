@@ -1,16 +1,17 @@
 import { Icontact } from "~/utility/interface"
 import Msg from "./Msg"
 import { api } from "~/utility/backend"
-import { Accessor, createEffect, For, Show } from "solid-js"
+import { Accessor, For, Show, Suspense } from "solid-js"
 
 interface props {
   c: Accessor<Icontact>
 }
 const ChatView = ({c}:props) => {
 
-  const { signal } = api.messages.getLiveResource(c())
+  const { signal } = api.messages.getLiveResource(c)
 
   return (
+    <Suspense fallback="...">
     <div class="p-5 px-7">
       <Show when={signal()}>
         {ms => <For each={ms().items}>{i => <Msg isRightSide={i.sender !== c().id}>{i.content}</Msg>}</For>}
@@ -19,6 +20,7 @@ const ChatView = ({c}:props) => {
         "No messages yet!"
       </Show>
     </div>
+    </Suspense>
   )
 }
 
