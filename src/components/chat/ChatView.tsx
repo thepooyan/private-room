@@ -14,9 +14,9 @@ const ChatView = ({c}:props) => {
     <Suspense fallback="...">
     <div class="p-5 px-7">
       <Show when={signal()}>
-        {ms => <For each={ms().items}>{i => <Msg isRightSide={i.sender !== c().id}>{i.content}</Msg>}</For>}
+        {ms => <For each={ms().data?.items}>{i => <Msg isRightSide={i.sender !== c().id}>{i.content}</Msg>}</For>}
       </Show>
-      <Show when={signal()?.items.length === 0}>
+      <Show when={signal()?.data?.items.length === 0}>
         "No messages yet!"
       </Show>
     </div>

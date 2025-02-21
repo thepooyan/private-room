@@ -2,6 +2,7 @@ import PocketBase from "pocketbase"
 import { Icontact, Imessage, Iuser } from "./interface";
 import { Accessor, createResource } from "solid-js";
 import { user } from "./signal";
+import { createQuery } from "@tanstack/solid-query";
 
 const pb = new PocketBase('http://127.0.0.1:8090')
 
@@ -39,14 +40,14 @@ export const api = {
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
     getLiveResource: (c: Accessor<Icontact>) => {
-      const [signal, {mutate}] = createResource(c,() => api.messages.getAll(c()))
+      const [signal, {mutate}] = createResource(c,() => messageQuery(c()))
 
       pb_msg.unsubscribe("*")
       pb_msg.subscribe("*", (e) => {
         switch (e.action) {
           case "create":
             let newMsg = e.record;
-            mutate(prev => prev ? {...prev, items: [...prev.items, newMsg]} : undefined)
+            // mutate(prev => prev ? {...prev, data: {items}} : undefined)
             break;
           case "delete":
             // let wasPost = e.record;
@@ -58,4 +59,12 @@ export const api = {
       return { signal  }
     }
   }
+}
+
+export const messageQuery = (contact: Icontact) => {
+  return createQuery(() => ({
+    queryKey: [contact.id],
+    queryFn: () => api.messages.getAll(contact),
+    staleTime: 2000
+  }))
 }
