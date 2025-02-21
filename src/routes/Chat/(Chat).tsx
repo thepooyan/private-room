@@ -1,11 +1,9 @@
-import { createEffect, Show } from "solid-js";
+import { Show } from "solid-js";
 import ChatBox from "~/components/chat/ChatBox";
 import { currentChat } from "~/utility/signal";
 
 const Chat = () => {
-  createEffect(() => {
-    console.log(currentChat())
-  })
+
   return (
     <>
       <div class="border-1 border-gray-500 flex flex-col justify-between">
