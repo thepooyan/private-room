@@ -1,8 +1,8 @@
 import PocketBase from "pocketbase"
 import { Icontact, Imessage, Iuser } from "./interface";
-import { Accessor, createEffect, createResource } from "solid-js";
+import { Accessor, } from "solid-js";
 import { user } from "./signal";
-import { createQuery, useQueryClient } from "@tanstack/solid-query";
+import { createQuery  } from "@tanstack/solid-query";
 
 const pb = new PocketBase('http://127.0.0.1:8090')
 
