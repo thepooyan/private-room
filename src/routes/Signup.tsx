@@ -1,5 +1,6 @@
 import { useNavigate } from "@solidjs/router";
 import { createEffect, createSignal } from "solid-js";
+import Avatar from "~/components/chat/Avatar";
 import A from "~/components/mine/A";
 import Spinner from "~/components/mine/Spinner";
 import { Alert, AlertDescription } from "~/components/ui/alert";
@@ -15,6 +16,7 @@ import { user } from "~/utility/signal";
 const Signup = () => {
   const [isLoading, setIsLoading] = createSignal(false);
   const [error, setError] = createSignal<string | null>(null);
+  const [avatar, setAvatar] = createSignal<string>("");
   const navigate = useNavigate()
   createEffect(() => {
     if (user.signal() !== null) navigate("/Chat")
@@ -45,6 +47,10 @@ const Signup = () => {
   return (
     <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
       <h1 class=" text-center text-3xl font-bold mb-3">Sign-up</h1>
+      <div class="flex justify-center items-center flex-col ">
+        <span>Avatar!</span>
+        <Avatar username={avatar}/>
+      </div>
       <TextField>
         <TextFieldLabel>Username:</TextFieldLabel>
         <TextFieldInput
@@ -52,6 +58,7 @@ const Signup = () => {
           ref={nameRef}
           class={`${error() && "border-red"}`}
           onblur={checkUsername}
+          onkeyup={e => setAvatar(e.currentTarget.value)}
         />
         <span class="text-red-600 text-xs">{error()}</span>
       </TextField>

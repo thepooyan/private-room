@@ -18,10 +18,10 @@ export const fetchAvatar = async (key: string) => {
   return await res.text()
 }
 
-export const avatarQuery = (key: string) => {
+export const avatarQuery = (key: Accessor<string>) => {
   return createQuery(() => ({
-    queryKey: ["avatar", key],
-    queryFn: () => fetchAvatar(key),
+    queryKey: ["avatar", key()],
+    queryFn: () => fetchAvatar(key()),
   }))
 }
 
