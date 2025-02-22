@@ -2,6 +2,7 @@ import { createMutation, createQuery, QueryClientConfig } from "@tanstack/solid-
 import { Icontact } from "./interface"
 import { api } from "./backend"
 import { qc } from "~/app"
+import { Accessor } from "solid-js"
 
 export const queryConfig:QueryClientConfig = {
   defaultOptions: {
@@ -24,12 +25,12 @@ export const avatarQuery = (key: string) => {
   }))
 }
 
-export const messagesMutation = (to: Icontact) => {
+export const messagesMutation = (to: Accessor<Icontact>) => {
   return createMutation(() => ({
-    mutationFn: (msg: string) => api.messages.send(to, msg),
+    mutationFn: (msg: string) => api.messages.send(to(), msg),
     onSettled: () => {
-      qc.invalidateQueries({queryKey: ["msgs", to.id]})
+      qc.invalidateQueries({queryKey: ["msgs", to().id]})
     },
-    mutationKey: ["mutateMsgs", to.id]
+    mutationKey: ["mutateMsgs", to().id]
   }), () => qc)
 }

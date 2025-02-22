@@ -1,15 +1,17 @@
 import { Button } from "../ui/button";
 import { TextField, TextFieldInput } from "../ui/text-field";
-import { currentChat } from "~/utility/signal";
 import { messagesMutation } from "~/utility/queries";
+import { Accessor } from "solid-js";
+import { Icontact } from "~/utility/interface";
 
-const ChatInput = () => {
+interface props {
+  c: Accessor<Icontact>
+}
+const ChatInput = ({c}:props) => {
 
   let inputRef!:HTMLInputElement;
 
-  let trg = currentChat()
-  if (!trg) throw new Error("No active chat")
-  let {mutateAsync} = messagesMutation(trg)
+  let {mutateAsync} = messagesMutation(c)
 
   const submitHandler = async (e:SubmitEvent) => {
     e.preventDefault()

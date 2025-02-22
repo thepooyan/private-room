@@ -10,7 +10,7 @@ const ChatBox = ({c}:props) => {
   return (
     <>
       <ChatView c={c}/>
-      <ChatInput/>
+      <ChatInput c={c}/>
     </>
   )
 }

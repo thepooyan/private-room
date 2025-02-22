@@ -2,7 +2,6 @@ import { Icontact } from "~/utility/interface";
 import Msg from "./Msg";
 import { api } from "~/utility/backend";
 import { Accessor, For, Show, Suspense } from "solid-js";
-import { currentChat } from "~/utility/signal";
 import { useMutationState } from "@tanstack/solid-query";
 
 interface props {
@@ -11,10 +10,8 @@ interface props {
 const ChatView = ({ c }: props) => {
   const { signal } = api.messages.getLiveResource(c);
 
-  let trg = currentChat()
-  if (!trg) throw new Error("No active chat")
   let variables = useMutationState<string>(()=>({
-    filters: {mutationKey: ["mutateMsgs", trg.id], status: "pending"},
+    filters: {mutationKey: ["mutateMsgs", c().id], status: "pending"},
     select: (mutation) => mutation.state.variables as string
   }))
 
