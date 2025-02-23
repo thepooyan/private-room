@@ -48,8 +48,8 @@ const Signup = () => {
     <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
       <h1 class=" text-center text-3xl font-bold mb-3">Sign-up</h1>
       <div class="flex justify-center items-center flex-col gap-2 ">
-        <span class="text-sm">Avatar based on your username:</span>
-        <Avatar username={avatar}/>
+        <span class="text-sm">Avatar based on "{avatar()}"</span>
+        <Avatar reactive={avatar}/>
       </div>
       <TextField>
         <TextFieldLabel>Username:</TextFieldLabel>
