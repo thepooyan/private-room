@@ -1,5 +1,5 @@
 import PocketBase, { ListResult } from "pocketbase"
-import { Icontact, Imessage, Iuser } from "./interface";
+import { Icontact, IlocalUser, Imessage, Iuser } from "./interface";
 import { Accessor, } from "solid-js";
 import { user } from "./signal";
 import { createQuery  } from "@tanstack/solid-query";
@@ -40,31 +40,26 @@ export const api = {
       let him = c.id
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
-    getLiveResource: (c: Accessor<Icontact>) => {
-      console.log("new live resource")
-      console.log(c())
-      c()
+    getAllReactive: (c: Accessor<Icontact>) => {
       const signal = messageQuery(c)
-      let userSignal = user.signal()
-      if (!userSignal) throw new Error("not logged in")
-      let me = userSignal.id
-      let him = c().id
-
-      pb_msg.unsubscribe("*")
-      pb_msg.subscribe("*", e => {
+      return { signal }
+    }, 
+    subscribeUser: (user: IlocalUser) => {
+      return pb_msg.subscribe("*", e => {
         switch(e.action) {
           case "create":
-            qc.setQueryData(["msgs", c().id], (oldldata: ListResult<Imessage>) => {
-              return {...oldldata, items: [...oldldata.items, e.record] }
+            qc.setQueryData(["msgs", e.record.sender], (oldldata: ListResult<Imessage> | null) => {
+              return oldldata?.items ? {...oldldata, items: [...oldldata.items, e.record] } : null
             })
-            e.record
           break
           case "delete":
           break
         }
-      }, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
-      return { signal }
-    }, 
+      }, {filter: `reciever = "${user.id}"`})
+    },
+    unsubscribeToAll: () => {
+      return pb_msg.unsubscribe("")
+    }
   }
 }
 

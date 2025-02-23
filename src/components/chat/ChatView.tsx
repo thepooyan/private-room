@@ -8,7 +8,7 @@ interface props {
   c: Accessor<Icontact>;
 }
 const ChatView = ({ c }: props) => {
-  const { signal } = api.messages.getLiveResource(c);
+  const { signal } = api.messages.getAllReactive(c);
 
   let variables = useMutationState<string>(()=>({
     filters: {mutationKey: ["mutateMsgs", c().id], status: "pending"},
