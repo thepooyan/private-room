@@ -3,6 +3,7 @@ import { Iuser } from "~/utility/interface"
 import { contanctStorage } from "~/utility/utility"
 import { reloadContacts } from "./contactList"
 import { api } from '~/utility/backend'
+import { setCurrentChat } from '~/utility/signal'
 
 const AddContact = () => {
   const add = async () => {
@@ -16,8 +17,10 @@ const AddContact = () => {
       return alert("User not found!")
     }
 
-    contanctStorage.add({username: trg.username, public_key: trg.public_key as JsonWebKey, id: trg.id})
+    let newcontact = {username: trg.username, public_key: trg.public_key as JsonWebKey, id: trg.id}
+    contanctStorage.add(newcontact)
     reloadContacts()
+    setCurrentChat(newcontact)
   }
   return (
     <>
