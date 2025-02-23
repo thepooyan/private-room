@@ -8,3 +8,11 @@ export const useNeedsUser = (returnTo: string = "/Login") => {
     if (user.signal() === null) navigate(returnTo)
   })
 }
+
+export const useLogout = () => {
+  const navigate = useNavigate()
+  return () => {
+    user.logout()
+    navigate("/Login")
+  }
+}

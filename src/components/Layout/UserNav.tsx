@@ -4,10 +4,13 @@ import { onCleanup, onMount, Show } from "solid-js";
 import { Button } from "../ui/button";
 import Copyable from "../mine/Copyable";
 import { api } from "~/utility/backend";
+import { useLogout } from "~/utility/hooks";
 
 export const navHeight = 25
 
 const UserNav = () => {
+
+  const logout = useLogout()
 
   onMount(() => {
     let userSignal = user.signal()
@@ -28,7 +31,7 @@ const UserNav = () => {
           <Copyable toCopy={JSON.stringify(u().public_key)}>Copy my public key</Copyable>
           <Copyable toCopy={JSON.stringify(u().private_key)}>Copy my private key</Copyable>
         </div>
-        <Button onclick={() => user.logout()}>Logout</Button>
+        <Button onclick={logout}>Logout</Button>
       </div>}
     </Show>
   );
