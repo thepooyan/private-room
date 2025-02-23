@@ -1,4 +1,4 @@
-import { Icontact } from "./interface";
+import { Icontact, Imessage } from "./interface";
 
 export class objectStorage<T extends object> {
   private key: string
