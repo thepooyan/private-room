@@ -41,14 +41,19 @@ export const api = {
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
     getLiveResource: (c: Accessor<Icontact>) => {
+      console.log("new live resource")
+      console.log(c())
+      c()
       const signal = messageQuery(c)
+      let userSignal = user.signal()
+      if (!userSignal) throw new Error("not logged in")
+      let me = userSignal.id
+      let him = c().id
+
       pb_msg.unsubscribe("*")
       pb_msg.subscribe("*", e => {
         switch(e.action) {
           case "create":
-            let sig = user.signal()
-            if (!sig) throw new Error("User not logged in")
-            if (e.record.sender !== c().id || e.record.reciever !== sig.id) return
             qc.setQueryData(["msgs", c().id], (oldldata: ListResult<Imessage>) => {
               return {...oldldata, items: [...oldldata.items, e.record] }
             })
@@ -57,9 +62,9 @@ export const api = {
           case "delete":
           break
         }
-      })
+      }, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
       return { signal }
-    }
+    }, 
   }
 }
 
