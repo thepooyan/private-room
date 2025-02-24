@@ -4,6 +4,7 @@ import { user } from "./signal";
 import { api } from "./backend";
 import { IlocalUser } from "./interface";
 import { contanctStorage } from "./utility";
+import { reloadContacts } from "~/components/chat/contactList";
 
 export const createNewUser = async (username: string) => {
   const {publicKey, privateKey} = await generateRSAKeyPair();
@@ -44,4 +45,5 @@ export const usernameExists = async (username: string):Promise<boolean> => {
 export const addContactsFromApi = async(user: IlocalUser) => {
   let new_contacts = await api.users.findContacts(user)
   new_contacts.forEach(n => contanctStorage.add(n))
+  reloadContacts()
 }
