@@ -25,7 +25,8 @@ const Signup = () => {
 
   let nameRef!: HTMLInputElement;
 
-  const signup = async () => {
+  const signup = async (e:SubmitEvent) => {
+    e.preventDefault()
     const username = nameRef.value
     setIsLoading(true);
     if (await usernameExists(username)) {
@@ -45,7 +46,7 @@ const Signup = () => {
   };
 
   return (
-    <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto ">
+    <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto " onsubmit={signup}>
       <h1 class=" text-center text-3xl font-bold mb-3">Sign-up</h1>
       <div class="flex justify-center items-center flex-col gap-2 ">
         <span class="text-sm">Avatar based on "{avatar()}"</span>
@@ -68,7 +69,7 @@ const Signup = () => {
           for you automatically. <A href="/About">Learn more</A>
         </AlertDescription>
       </Alert>
-      <Button onclick={signup} disabled={isLoading() || error() !== null}>
+      <Button type="submit" disabled={isLoading() || error() !== null}>
         {isLoading() ? <Spinner /> : "Generate your keypair!"}
       </Button>
       <p class="text-center">
