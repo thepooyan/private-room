@@ -2,6 +2,8 @@ import { ClientResponseError } from "pocketbase";
 import { exportCryptoKey, generateRSAKeyPair } from "./crypto";
 import { user } from "./signal";
 import { api } from "./backend";
+import { IlocalUser } from "./interface";
+import { contanctStorage } from "./utility";
 
 export const createNewUser = async (username: string) => {
   const {publicKey, privateKey} = await generateRSAKeyPair();
@@ -37,4 +39,9 @@ export const usernameExists = async (username: string):Promise<boolean> => {
         throw new Error(e)
       });
   }
+}
+
+export const addContactsFromApi = async(user: IlocalUser) => {
+  let new_contacts = await api.users.findContacts(user)
+  new_contacts.forEach(n => contanctStorage.add(n))
 }

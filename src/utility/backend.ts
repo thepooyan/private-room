@@ -20,6 +20,25 @@ export const api = {
     },
     new: (username: string, publicKey: string) => {
       return pb_users.create({username: username, public_key: publicKey})
+    },
+    findContacts: async (user: IlocalUser) => {
+      let res = await pb_msg.getFullList<{expand:{reciever:Icontact}}>({
+        filter: `sender = "${user.id}"`,
+        fields: "expand.reciever.username, expand.reciever.public_key,expand.reciever.id",
+        expand: "reciever"
+      })
+      let uniqe = new Set<string>()
+      let contacts:Icontact[] = []
+      res.forEach(i => {
+        if (uniqe.has(i.expand.reciever.id)) return
+        uniqe.add(i.expand.reciever.id)
+        contacts.push({
+          id: i.expand.reciever.id,
+          username: i.expand.reciever.username,
+          public_key: i.expand.reciever.public_key
+        })
+      })
+      return contacts
     }
   },
   messages: {
