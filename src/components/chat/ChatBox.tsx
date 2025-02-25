@@ -8,10 +8,10 @@ interface props {
 }
 const ChatBox = ({c}:props) => {
   return (
-    <>
+    <div class="h-full flex justify-between flex-col pb-1">
       <ChatView c={c}/>
       <ChatInput c={c}/>
-    </>
+    </div>
   )
 }
 

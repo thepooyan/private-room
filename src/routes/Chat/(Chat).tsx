@@ -5,22 +5,20 @@ import { currentChat } from "~/utility/signal";
 const Chat = () => {
 
   return (
-    <>
-      <div class=" flex flex-col justify-between">
-        <Show when={!currentChat()}>
-          <div class="flex justify-center items-center h-full">
-            Select one contact to continue
-          </div>
-        </Show>
-        <Show when={currentChat()}>
-          {(c) => (
-            <>
-              <ChatBox c={c} />
-            </>
-          )}
-        </Show>
-      </div>
-    </>
+    <div class="border-1 border-white rounded mr-1 ">
+      <Show when={!currentChat()}>
+        <div class="flex justify-center items-center h-full">
+          Select one contact to continue
+        </div>
+      </Show>
+      <Show when={currentChat()}>
+        {(c) => (
+          <>
+            <ChatBox c={c} />
+          </>
+        )}
+      </Show>
+    </div>
   );
 };
 
