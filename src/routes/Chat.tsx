@@ -7,8 +7,8 @@ const Chat = ({children}:ParentProps) => {
   useNeedsUser()
   return (
     <div class="h-dvh grid grid-cols-[1fr_3fr] grid-rows-[1fr_7fr]  ">
-      <UserNav/>
       <ContactList/>
+      <UserNav/>
       {children}
     </div>
   )
