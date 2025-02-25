@@ -14,6 +14,12 @@ const UserNav = () => {
   const logout = useLogout()
   const deleteAccount = () => {
     callModal.prompt()
+    .yes(() => {
+        console.log("delete account")
+      })
+    .no(() => {
+        console.log("nothing")
+      })
   }
 
   onMount(() => {
