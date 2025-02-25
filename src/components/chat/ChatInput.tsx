@@ -22,12 +22,12 @@ const ChatInput = ({c}:props) => {
   let disabled = () => false
 
   return (
-    <form class={`relative p-2 rounded flex gap-2 w-full bg-gray-200 `} onsubmit={submitHandler}>
+    <form class={`relative p-2 rounded flex gap-2 w-full  `} onsubmit={submitHandler}>
       {disabled() && <div class="w-full h-full absolute left-0 bg-gray-600 opacity-70 top-0 cursor-not-allowed "></div>}
       <TextField class="w-full  ">
-        <TextFieldInput placeholder="Message..." ref={inputRef} disabled={disabled()} class="bg-white"/>
+        <TextFieldInput placeholder="Message..." ref={inputRef} disabled={disabled()}  /> 
       </TextField>
-      <Button type="submit" disabled={disabled()}>send</Button>
+      <Button variant="secondary" type="submit" disabled={disabled()}>send</Button>
     </form>
   )
 }

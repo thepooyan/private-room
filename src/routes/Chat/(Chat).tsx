@@ -6,7 +6,7 @@ const Chat = () => {
 
   return (
     <>
-      <div class="border-1 border-gray-500 flex flex-col justify-between">
+      <div class=" flex flex-col justify-between">
         <Show when={!currentChat()}>
           <div class="flex justify-center items-center h-full">
             Select one contact to continue

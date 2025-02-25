@@ -28,7 +28,9 @@ const ChatView = ({ c }: props) => {
         <Show when={variables()}>
           {vful => <For each={vful()}>{vitem => <Msg isTemp isRightSide>{vitem}</Msg>}</For>}
         </Show>
-        <Show when={signal?.data?.items.length === 0 && variables().length === 0}>"No messages yet!"</Show>
+        <Show when={signal?.data?.items.length === 0 && variables().length === 0}>
+          <div class=" w-full h-full flex justify-center items-center text-gray-400 ">No messages yet</div>
+        </Show>
       </div>
     </Suspense>
   );
