@@ -5,12 +5,16 @@ import { Button } from "../ui/button";
 import Copyable from "../mine/Copyable";
 import { api } from "~/utility/backend";
 import { useLogout } from "~/utility/hooks";
+import { callModal } from "../modal/Modal";
 
 export const navHeight = 25
 
 const UserNav = () => {
 
   const logout = useLogout()
+  const deleteAccount = () => {
+    callModal.prompt()
+  }
 
   onMount(() => {
     let userSignal = user.signal()
@@ -37,7 +41,7 @@ const UserNav = () => {
         </div>
         <div class="space-x-2">
           <Button onclick={logout} variant="secondary">Logout</Button>
-          <Button  variant="destructive">Delete account</Button>
+          <Button onclick={deleteAccount} variant="destructive">Delete account</Button>
         </div>
       </div>}
     </Show>

@@ -7,12 +7,15 @@ import { Suspense } from "solid-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { queryConfig } from "./utility/queries";
 import { ColorModeProvider, ColorModeScript } from "@kobalte/core";
+import Modal from "./components/modal/Modal";
 
 export let qc = new QueryClient(queryConfig);
 
 export default function App() {
 
   return (
+    <>
+    <Modal/>
     <QueryClientProvider client={qc}>
       <ColorModeScript/>
       <ColorModeProvider initialColorMode="dark">
@@ -27,5 +30,6 @@ export default function App() {
         </Router>
     </ColorModeProvider>
     </QueryClientProvider>
+    </>
   );
 }
