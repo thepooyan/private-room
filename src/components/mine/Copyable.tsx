@@ -9,9 +9,15 @@ const Copyable = ({children, toCopy}:props) => {
     copyToClipboard(toCopy)
     .catch(e => alert(e))
   }
-  return (
-    <div class="cursor-pointer" onclick={click}>
-      {children}
+  const limitSize = (str: string) => {
+    let limit = 20
+    if (str.length > limit)
+      return str.substring(0, limit).concat("...")
+    return str
+  }
+   return (
+    <div class="cursor-pointer inline" onclick={click}>
+      {children ? children : limitSize(toCopy)}
     </div>
   )
 }

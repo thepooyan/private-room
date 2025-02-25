@@ -9,7 +9,7 @@ export const reloadContacts = () => {
 }
 const ContactList = () => {
   return (
-    <div class=" bg-zinc-900 ">
+    <div class="  ">
       <AddContact/>
       <Show when={contacts()}>
         <For each={Array.from(contacts())}>

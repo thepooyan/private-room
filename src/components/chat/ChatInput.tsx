@@ -1,8 +1,9 @@
 import { Button } from "../ui/button";
 import { TextField, TextFieldInput } from "../ui/text-field";
 import { messagesMutation } from "~/utility/queries";
-import { Accessor } from "solid-js";
+import { Accessor, createSignal } from "solid-js";
 import { Iuser } from "~/utility/interface";
+import clsx from "clsx";
 
 interface props {
   c: Accessor<Iuser>
@@ -12,22 +13,24 @@ const ChatInput = ({c}:props) => {
   let inputRef!:HTMLInputElement;
 
   let {mutateAsync} = messagesMutation(c)
+  const [disabled, setDisabled] = createSignal(true)
 
   const submitHandler = async (e:SubmitEvent) => {
     e.preventDefault()
     mutateAsync(inputRef.value)
     inputRef.value = ""
   }
-
-  let disabled = () => false
+  const onInput = () => {
+    if (inputRef.value === "") setDisabled(true)
+    else setDisabled(false)
+  }
 
   return (
     <form class={`relative p-2 rounded flex gap-2 w-full  `} onsubmit={submitHandler}>
-      {disabled() && <div class="w-full h-full absolute left-0 bg-zinc-600 opacity-70 top-0 cursor-not-allowed "></div>}
       <TextField class="w-full  ">
-        <TextFieldInput placeholder="Message..." ref={inputRef} disabled={disabled()}  /> 
+        <TextFieldInput placeholder="Message..." ref={inputRef} oninput={onInput} /> 
       </TextField>
-      <Button variant="secondary" type="submit" disabled={disabled()}>send</Button>
+      <Button type="submit" disabled={disabled()} class={clsx(disabled() && "opacity-50")}>Send</Button>
     </form>
   )
 }

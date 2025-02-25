@@ -22,16 +22,20 @@ const UserNav = () => {
   })
   return (
     <Show when={user.signal()}>
-      {u => <div class={ ` bg-zinc-800 px-5 p-2 flex justify-between items-center grid-col-span-full ` }>
-        <div class=" inline-flex flex-col items-center w-max ">
+      {u => <div class={ `  px-5 p-4 flex justify-between items-center grid-col-span-full ` }>
+        <div class=" inline-flex gap-4 ">
           <Avatar username={u().username} />
-          {u().username}
+          <div class=" text-sm flex flex-col justify-center text-zinc-300 ">
+            <p>
+              <span class="text-xs text-zinc-500">Username: </span>{u().username}
+            </p>
+            <p>
+              <span class="text-xs text-zinc-500">Public key: </span>
+              <Copyable toCopy={JSON.stringify(u().public_key)}/>
+            </p>
+          </div>
         </div>
-        <div>
-          <Copyable toCopy={JSON.stringify(u().public_key)}>Copy my public key</Copyable>
-          <Copyable toCopy={JSON.stringify(u().private_key)}>Copy my private key</Copyable>
-        </div>
-        <Button onclick={logout}>Logout</Button>
+        <Button onclick={logout} variant="secondary">Logout</Button>
       </div>}
     </Show>
   );

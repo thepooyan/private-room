@@ -19,7 +19,7 @@ const Avatar = ({username, reactive, sm}:props) => {
   return (
     <div class={clsx(
       sm && "w-11 h-11",
-      !sm && "w-15 h-15"
+      !sm && "w-13 h-13"
     )}>
       <Suspense fallback={<Fallback/>}>
         <div innerHTML={avatar.data} class="bg-zinc rounded-full overflow-hidden" ></div>
