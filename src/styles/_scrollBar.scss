@@ -1,0 +1,23 @@
+:root {
+  --color-sb-base: #00000029;
+  --color-sb-fill: #3d5a6cb8;
+}
+
+::-webkit-scrollbar {
+  width: .5em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-sb-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-sb-fill);
+  border-radius: 5em;
+
+  &:hover {
+    --color-sb-fill: #3d5a6c;
+    cursor: pointer;
+  }
+}
+
