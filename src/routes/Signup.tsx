@@ -12,6 +12,7 @@ import {
 } from "~/components/ui/text-field";
 import { createNewUser, usernameExists } from "~/utility/logic";
 import { user } from "~/utility/signal";
+import { debounce } from "~/utility/utility";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = createSignal(false);
@@ -42,8 +43,19 @@ const Signup = () => {
   const checkUsername = async () => {
     if (await usernameExists(nameRef.value))
       setError("Username already exists");
-    else setError(null);
+    else {
+        setError(null)
+      };
+      setIsLoading(false)
   };
+  const d_checkUsername = debounce(checkUsername, 300)
+  const d_setAvatar = debounce(setAvatar, 300)
+
+  const onInput = () => {
+    setIsLoading(true)
+    d_checkUsername()
+    d_setAvatar(nameRef.value)
+  }
 
   return (
     <form class="w-sm flex flex-col gap-4 justify-center h-dvh m-auto " onsubmit={signup}>
@@ -58,8 +70,7 @@ const Signup = () => {
           placeholder="Find a uniqe username"
           ref={nameRef}
           class={`${error() && "border-red"}`}
-          onblur={checkUsername}
-          onkeyup={e => setAvatar(e.currentTarget.value)}
+          onInput={onInput}
         />
         <span class="text-red-600 text-xs">{error()}</span>
       </TextField>

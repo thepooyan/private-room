@@ -42,7 +42,7 @@ const avatarQuery = (key: Accessor<string>) => {
 
 
 const Fallback = () => {
-  return <div class="bg-zinc rounded-full flex justify-center items-center" >
+  return <div class="w-full h-full bg-zinc rounded-full flex justify-center items-center" >
     <div class="w-5 h-5 rounded-full border-2 border-white border-t-zinc-300 border-b-zinc-300 animate-spin"></div>
   </div>
 }
