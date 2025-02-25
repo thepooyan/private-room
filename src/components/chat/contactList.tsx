@@ -9,8 +9,7 @@ export const reloadContacts = () => {
 }
 const ContactList = () => {
   return (
-    <div class=" bg-zinc-900 border-t-1 border-zinc-700 ">
-      <AddContact/>
+    <div class=" border-t-1 border-zinc-700 relative ">
       <Show when={contacts()}>
         <For each={Array.from(contacts())}>
           {c => <ContactPreview contact={c}/>}
@@ -21,6 +20,7 @@ const ContactList = () => {
             You can add people to chat with, using the plus icon
           </p>
         </Show>
+        <AddContact/>
       </Show>
     </div>
   )

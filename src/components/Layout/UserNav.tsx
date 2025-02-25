@@ -35,7 +35,10 @@ const UserNav = () => {
             </p>
           </div>
         </div>
-        <Button onclick={logout} variant="secondary">Logout</Button>
+        <div class="space-x-2">
+          <Button onclick={logout} variant="secondary">Logout</Button>
+          <Button  variant="destructive">Delete account</Button>
+        </div>
       </div>}
     </Show>
   );
