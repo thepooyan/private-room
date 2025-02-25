@@ -11,6 +11,7 @@ const ContactList = () => {
   return (
     <div class=" bg-zinc-800 relative grid-row-span-full pt-2 ">
       <Show when={contacts()}>
+        <AddContact/>
         <For each={Array.from(contacts())}>
           {c => <ContactPreview contact={c}/>}
         </For>
@@ -20,7 +21,6 @@ const ContactList = () => {
             You can add people to chat with, using the plus icon
           </p>
         </Show>
-        <AddContact/>
       </Show>
     </div>
   )

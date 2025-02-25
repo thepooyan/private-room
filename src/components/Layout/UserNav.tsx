@@ -13,7 +13,7 @@ const UserNav = () => {
 
   const logout = useLogout()
   const deleteAccount = () => {
-    callModal.prompt()
+    callModal.prompt("Your account will be deleted permanently. Are you sure?")
     .yes(() => {
         console.log("delete account")
       })
