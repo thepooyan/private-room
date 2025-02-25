@@ -11,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
+import { TextField, TextFieldInput } from "../ui/text-field";
 
 const AddContact = () => {
   const add = async () => {
@@ -36,21 +37,18 @@ const AddContact = () => {
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogTrigger class="w-full">
+          <AiFillPlusCircle class="text-gray-400 hover:text-gray-500 cursor-pointer w-5 h-5 rounded-full flex justify-center items-center font-bold mx-auto my-2 " />
+        </AlertDialogTrigger>
         <AlertDialogContent>
-          <AlertDialogTitle>Alert Dialog</AlertDialogTitle>
+          <AlertDialogTitle>Add Contact:</AlertDialogTitle>
           <AlertDialogDescription>
-            An Alert Dialog enables assistive technologies and browsers to
-            distinguish alert dialogs from other dialogs so they have the option
-            of giving alert dialogs special treatment, such as playing a system
-            alert sound.
+            <TextField>
+              <TextFieldInput/>
+            </TextField>
           </AlertDialogDescription>
         </AlertDialogContent>
       </AlertDialog>
-      <AiFillPlusCircle
-        class="text-gray-400 hover:text-gray-500 cursor-pointer w-5 h-5 rounded-full flex justify-center items-center font-bold mx-auto my-2 "
-        onclick={add}
-      />
     </>
   );
 };

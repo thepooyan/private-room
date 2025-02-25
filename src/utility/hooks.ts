@@ -4,6 +4,7 @@ import { createEffect } from "solid-js"
 
 export const useNeedsUser = (returnTo: string = "/Login") => {
   const navigate = useNavigate()
+  if (user.signal() === null) navigate(returnTo)
   createEffect(() => {
     if (user.signal() === null) navigate(returnTo)
   })
