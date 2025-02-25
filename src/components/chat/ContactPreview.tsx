@@ -19,8 +19,8 @@ const ContactPreview = ({contact}:props) => {
   }
   return (
     <div class={clsx(
-        `flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-gray-700 p-2 transition-colors `,
-        currentChat() === contact && "bg-gray-800"
+        `flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-zinc-700 p-2 transition-colors `,
+        currentChat() === contact && "bg-zinc-800"
       )}
       onclick={() => { setCurrentChat(contact)}}>
       <AiOutlineDelete size={34}  class="text-red hover:bg-red-200 rounded-full p-1  " onclick={deleteMe}/>

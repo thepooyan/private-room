@@ -8,8 +8,8 @@ interface props extends ParentProps {
 const Msg = ({isRightSide = false, children, isTemp = false}:props) => {
   return (
     <div class={clsx(
-      "bg-teal-200 w-max p-2 mb-4 rounded ",
-      isRightSide && "!bg-indigo-400 ml-auto ",
+      " bg-zinc-800 w-max p-2 px-3 mb-4 rounded-xl text-sm ",
+      isRightSide && "!bg-white ml-auto text-black ",
       isTemp && "opacity-40"
     )}>
       {children}

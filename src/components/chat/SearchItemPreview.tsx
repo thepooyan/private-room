@@ -18,7 +18,7 @@ const SearchItemPreview = ({contact, close}:props) => {
     setCurrentChat(contact);
   }
   return (
-    <div class={clsx(`flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-gray-600 p-2 transition-colors border-1 border-gray-800 `)}
+    <div class={clsx(`flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-zinc-600 p-2 transition-colors border-1 border-zinc-800 `)}
       onclick={addMe}
     >
       <AiOutlineUserAdd class=" text-green-400 "/>

@@ -18,11 +18,11 @@ const Avatar = ({username, reactive, sm}:props) => {
 
   return (
     <div class={clsx(
-      sm && "w-11",
-      !sm && "w-15"
+      sm && "w-11 h-11",
+      !sm && "w-15 h-15"
     )}>
       <Suspense fallback={<Fallback/>}>
-        <div innerHTML={avatar.data} class="bg-gray rounded-full overflow-hidden" ></div>
+        <div innerHTML={avatar.data} class="bg-zinc rounded-full overflow-hidden" ></div>
       </Suspense>
     </div>
   )
@@ -42,13 +42,13 @@ const avatarQuery = (key: Accessor<string>) => {
 
 
 const Fallback = () => {
-  return <div class="w-15 h-15 bg-gray rounded-full flex justify-center items-center" >
-    <div class="w-5 h-5 rounded-full border-2 border-white border-t-gray-300 border-b-gray-300 animate-spin"></div>
+  return <div class="bg-zinc rounded-full flex justify-center items-center" >
+    <div class="w-5 h-5 rounded-full border-2 border-white border-t-zinc-300 border-b-zinc-300 animate-spin"></div>
   </div>
 }
 
 const Blank = () => {
-  return <div class="w-15 h-15 bg-gray rounded-full flex justify-center items-center"></div>
+  return <div class="w-15 h-15 bg-zinc rounded-full flex justify-center items-center"></div>
 }
 
 export default Avatar

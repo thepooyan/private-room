@@ -38,7 +38,7 @@ const AddContact = () => {
     <>
       <AlertDialog open={open()} onOpenChange={setOpen}>
         <AlertDialogTrigger class="w-full">
-          <AiFillPlusCircle class="text-gray-400 hover:text-gray-500 cursor-pointer w-5 h-5 rounded-full flex justify-center items-center font-bold mx-auto my-2 " />
+          <AiFillPlusCircle class="text-zinc-400 hover:text-zinc-500 cursor-pointer w-5 h-5 rounded-full flex justify-center items-center font-bold mx-auto my-2 " />
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogTitle>Add contacts:</AlertDialogTitle>
