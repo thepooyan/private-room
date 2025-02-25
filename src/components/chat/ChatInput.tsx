@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import { FiSend } from 'solid-icons/fi'
 import { TextField, TextFieldInput } from "../ui/text-field";
 import { messagesMutation } from "~/utility/queries";
 import { Accessor, createSignal } from "solid-js";
@@ -30,7 +31,9 @@ const ChatInput = ({c}:props) => {
       <TextField class="w-full  ">
         <TextFieldInput placeholder="Message..." ref={inputRef} oninput={onInput} /> 
       </TextField>
-      <Button type="submit" disabled={disabled()} class={clsx(disabled() && "opacity-50")}>Send</Button>
+      <Button type="submit" disabled={disabled()} class={clsx(disabled() && "opacity-50")}>
+        <FiSend/>
+      </Button>
     </form>
   )
 }
