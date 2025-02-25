@@ -19,13 +19,15 @@ const ContactPreview = ({contact}:props) => {
   }
   return (
     <div class={clsx(
-        `flex rounded-lg m-1 cursor-pointer items-center gap-2 cursor-pointer hover:bg-zinc-700 p-2 transition-colors `,
-        currentChat() === contact && "bg-zinc-800"
+        `flex rounded-lg m-1 cursor-pointer items-center justify-between cursor-pointer hover:bg-zinc-700 p-2 transition-colors `,
+        currentChat() === contact && "bg-zinc-900"
       )}
       onclick={() => { setCurrentChat(contact)}}>
+      <div class="flex items-center gap-2">
+        <Avatar username={contact.username}/>
+        <p>{contact.username}</p>
+      </div>
       <AiOutlineDelete size={34}  class="text-red hover:bg-red-200 rounded-full p-1  " onclick={deleteMe}/>
-      <Avatar username={contact.username}/>
-      <p>{contact.username}</p>
     </div>
   )
 }
