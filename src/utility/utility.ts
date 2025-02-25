@@ -1,4 +1,4 @@
-import { Icontact } from "./interface";
+import { Iuser } from "./interface";
 
 export class objectStorage<T extends object> {
   private key: string
@@ -52,7 +52,7 @@ export class arrayStorage<T extends object> {
   }
 }
 
-export const contanctStorage = new arrayStorage<Icontact>("contacts")
+export const contanctStorage = new arrayStorage<Iuser>("contacts")
 
 export async function copyToClipboard(text: string): Promise<void> {
     if (!navigator.clipboard) {
@@ -95,4 +95,17 @@ function fallbackCopyTextToClipboard(text: string): void {
     }
     
     document.body.removeChild(textArea);
+}
+
+export function debounce<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
+  let timeoutId: NodeJS.Timeout | null = null;
+
+  return function (...args: Parameters<T>) {
+      if (timeoutId) {
+          clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+          func(...args);
+      }, delay);
+  };
 }

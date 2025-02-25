@@ -1,11 +1,11 @@
-import { Icontact } from "~/utility/interface";
+import { Iuser } from "~/utility/interface";
 import Msg from "./Msg";
 import { api } from "~/utility/backend";
 import { Accessor, For, Show, Suspense } from "solid-js";
 import { useMutationState } from "@tanstack/solid-query";
 
 interface props {
-  c: Accessor<Icontact>;
+  c: Accessor<Iuser>;
 }
 const ChatView = ({ c }: props) => {
   const { signal } = api.messages.getAllReactive(c);

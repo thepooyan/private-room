@@ -1,11 +1,13 @@
 import { createQuery } from "@tanstack/solid-query"
+import clsx from "clsx"
 import { Accessor, Suspense } from "solid-js"
 
 interface props {
   username?: string
   reactive?: Accessor<string>
+  sm?: boolean
 }
-const Avatar = ({username, reactive}:props) => {
+const Avatar = ({username, reactive, sm}:props) => {
   let key = () => {
     if (username) return username
     if (reactive) return reactive()
@@ -15,11 +17,14 @@ const Avatar = ({username, reactive}:props) => {
   let avatar = avatarQuery(key)
 
   return (
-    <>
+    <div class={clsx(
+      sm && "w-11",
+      !sm && "w-15"
+    )}>
       <Suspense fallback={<Fallback/>}>
-        <div innerHTML={avatar.data} class="w-15 bg-gray rounded-full overflow-hidden" ></div>
+        <div innerHTML={avatar.data} class="bg-gray rounded-full overflow-hidden" ></div>
       </Suspense>
-    </>
+    </div>
   )
 }
 

@@ -27,7 +27,7 @@ const AddContact = () => {
 
     let newcontact = {
       username: trg.username,
-      public_key: trg.public_key as JsonWebKey,
+      public_key: trg.public_key, 
       id: trg.id,
     };
     contanctStorage.add(newcontact);

@@ -1,5 +1,5 @@
 import PocketBase, { ListResult } from "pocketbase"
-import { Icontact, IlocalUser, Imessage, Iuser } from "./interface";
+import { IlocalUser, Imessage, Iuser } from "./interface";
 import { Accessor, } from "solid-js";
 import { user } from "./signal";
 import { createQuery  } from "@tanstack/solid-query";
@@ -22,13 +22,13 @@ export const api = {
       return pb_users.create({username: username, public_key: publicKey})
     },
     findContacts: async (user: IlocalUser) => {
-      let res = await pb_msg.getFullList<{expand:{reciever:Icontact}}>({
+      let res = await pb_msg.getFullList<{expand:{reciever:Iuser}}>({
         filter: `sender = "${user.id}"`,
         fields: "expand.reciever.username, expand.reciever.public_key,expand.reciever.id",
         expand: "reciever"
       })
       let uniqe = new Set<string>()
-      let contacts:Icontact[] = []
+      let contacts:Iuser[] = []
       res.forEach(i => {
         if (uniqe.has(i.expand.reciever.id)) return
         uniqe.add(i.expand.reciever.id)
@@ -39,10 +39,13 @@ export const api = {
         })
       })
       return contacts
+    },
+    searchByUsername: (username: string) => {
+      return pb_users.getList(1, 20, {filter: `username ~ "${username}"`})
     }
   },
   messages: {
-    send: (to: Icontact, content: string) => {
+    send: (to: Iuser, content: string) => {
       let sig = user.signal()
       if (!sig) throw new Error("User not logged in")
       let me = sig.id
@@ -52,14 +55,14 @@ export const api = {
         content: content
       })
     },
-    getAll: (c: Icontact) => {
+    getAll: (c: Iuser) => {
       let sig = user.signal()
       if (!sig) throw new Error("User not logged in")
       let me = sig.id
       let him = c.id
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
-    getAllReactive: (c: Accessor<Icontact>) => {
+    getAllReactive: (c: Accessor<Iuser>) => {
       const signal = messageQuery(c)
       return { signal }
     }, 
@@ -82,7 +85,7 @@ export const api = {
   }
 }
 
-export const messageQuery = (contact: Accessor<Icontact>) => {
+export const messageQuery = (contact: Accessor<Iuser>) => {
   return createQuery(() => ({
     queryKey: ["msgs", contact().id],
     queryFn: () => api.messages.getAll(contact()),

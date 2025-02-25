@@ -1,10 +1,10 @@
-import { Icontact } from "~/utility/interface"
+import { Iuser } from "~/utility/interface"
 import ChatInput from "./ChatInput"
 import ChatView from "./ChatView"
 import { Accessor } from "solid-js"
 
 interface props {
-  c: Accessor<Icontact>
+  c: Accessor<Iuser>
 }
 const ChatBox = ({c}:props) => {
   return (

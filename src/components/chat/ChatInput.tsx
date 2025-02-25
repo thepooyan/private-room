@@ -2,10 +2,10 @@ import { Button } from "../ui/button";
 import { TextField, TextFieldInput } from "../ui/text-field";
 import { messagesMutation } from "~/utility/queries";
 import { Accessor } from "solid-js";
-import { Icontact } from "~/utility/interface";
+import { Iuser } from "~/utility/interface";
 
 interface props {
-  c: Accessor<Icontact>
+  c: Accessor<Iuser>
 }
 const ChatInput = ({c}:props) => {
 

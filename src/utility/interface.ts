@@ -5,9 +5,10 @@ interface pbResponse {
   created: string;
   updated: string;
 }
-export interface Iuser extends pbResponse {
+export interface Iuser {
   public_key: string
   username: string
+  id: string
 }
 export interface Imessage extends pbResponse {
   content: string,
@@ -18,10 +19,5 @@ export interface IlocalUser {
   username: string,
   public_key: JsonWebKey,
   private_key: JsonWebKey,
-  id: string
-}
-export interface Icontact {
-  username: string,
-  public_key: JsonWebKey
   id: string
 }

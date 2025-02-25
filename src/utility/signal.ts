@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Icontact, IlocalUser } from "./interface";
+import { Iuser, IlocalUser } from "./interface";
 import { contanctStorage, objectStorage } from "./utility";
 import { reloadContacts } from "~/components/chat/contactList";
 
@@ -21,4 +21,4 @@ const logout = () => {
 
 export const user = {signal, login, logout}
 
-export const [currentChat, setCurrentChat] =  createSignal<Icontact | null>(null)
+export const [currentChat, setCurrentChat] =  createSignal<Iuser | null>(null)
