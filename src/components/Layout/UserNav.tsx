@@ -22,7 +22,7 @@ const UserNav = () => {
   })
   return (
     <Show when={user.signal()}>
-      {u => <div class={ ` px-5 p-2 bg-gray-200 flex justify-between items-center grid-col-span-full ` }>
+      {u => <div class={ ` px-5 p-2 flex justify-between items-center grid-col-span-full ` }>
         <div class=" inline-flex flex-col items-center w-max ">
           <Avatar username={u().username} />
           {u().username}
