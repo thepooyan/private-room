@@ -30,6 +30,7 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "sass-embedded": "^1.85.1",
     "unocss-preset-animations": "^1.1.1",
     "unocss-preset-shadcn": "^0.3.2"
   }
