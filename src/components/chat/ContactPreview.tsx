@@ -20,8 +20,8 @@ const ContactPreview = ({contact}:props) => {
   return (
     <>
     <div class={clsx(
-        `flex rounded-lg m-1 cursor-pointer items-center justify-between cursor-pointer hover:bg-zinc-700 p-2 transition-colors `,
-        currentChat() === contact && "bg-zinc-900",
+        `flex rounded-lg m-1 cursor-pointer items-center justify-between cursor-pointer hover:bg-zinc-600 p-2 transition-colors `,
+        currentChat() === contact && "bg-zinc-700",
       )}
       onclick={() => { setCurrentChat(contact)}}>
       <div class="flex items-center gap-2">
