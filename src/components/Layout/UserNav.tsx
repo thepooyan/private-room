@@ -12,6 +12,10 @@ export const navHeight = 25
 const UserNav = () => {
 
   const logout = useLogout()
+  const logoutConfirm = () => {
+    callModal.prompt("Logging out, you will not be able to log back in, if you don't have your Public and Private keys. Are you sure?")
+    .yes(logout)
+  }
   const deleteAccount = () => {
     callModal.prompt("Your account will be deleted permanently. Are you sure?")
     .yes(() => {
@@ -46,7 +50,7 @@ const UserNav = () => {
           </div>
         </div>
         <div class="space-x-2">
-          <Button onclick={logout} variant="secondary">Logout</Button>
+          <Button onclick={logoutConfirm} variant="secondary">Logout</Button>
           <Button onclick={deleteAccount} variant="destructive">Delete account</Button>
         </div>
       </div>}
