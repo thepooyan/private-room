@@ -6,15 +6,19 @@
 
 - sign msgs
 - where to hold private / public keys (***most important*** easy to install for the end user)
-- add modal
-- search up user id instead of adding public key manually
+- conversation req
+- if someone messages you, they should show up in conversation requests
+- delete account
+- delete msgs
 
+- a stats page about all the users of site
 - export keys to files
 - make the keys with gpg
-- a stats page about all the users of site
+- show an indicator when a chat has new msgs
+- notif system
+- add unread msgs (?)
+
+# done:
 - get contacts when users logs in 
-- show a notif when a chat has new msgs
-- add unread msgs
-- auto add contact if he msgs you 
-- block list
-- delete msgs
+- add modal
+- search up user id instead of adding public key manually
