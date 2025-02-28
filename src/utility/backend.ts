@@ -42,6 +42,11 @@ export const api = {
     },
     searchByUsername: (username: string) => {
       return pb_users.getList(1, 20, {filter: `username ~ "${username}"`})
+    },
+    deleteAccount: () => {
+      let u = user.signal()
+      if (!u) throw new Error("Not logged in!")
+      return pb_users.delete(u.id)
     }
   },
   messages: {

@@ -4,7 +4,7 @@ import { onCleanup, onMount, Show } from "solid-js";
 import { Button } from "../ui/button";
 import Copyable from "../mine/Copyable";
 import { api } from "~/utility/backend";
-import { useLogout } from "~/utility/hooks";
+import { useDeleteAccount, useLogout } from "~/utility/hooks";
 import { callModal } from "../modal/Modal";
 
 export const navHeight = 25
@@ -12,18 +12,15 @@ export const navHeight = 25
 const UserNav = () => {
 
   const logout = useLogout()
+  const da = useDeleteAccount()
+
   const logoutConfirm = () => {
     callModal.prompt("Logging out, you will not be able to log back in, if you don't have your Public and Private keys. Are you sure?")
     .yes(logout)
   }
   const deleteAccount = () => {
     callModal.prompt("Your account will be deleted permanently. Are you sure?")
-    .yes(() => {
-        console.log("delete account")
-      })
-    .no(() => {
-        console.log("nothing")
-      })
+    .yes(da)
   }
 
   onMount(() => {

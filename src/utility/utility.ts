@@ -132,3 +132,42 @@ export class CallbackStore {
     this.no = null
   }
 }
+export class Stack<T> {
+  private items: T[] = [];
+
+  constructor() {}
+
+  push(element: T): void {
+    this.items.push(element);
+  }
+
+  pop(): T | string {
+    if (this.isEmpty()) {
+      return "Underflow"; // Or throw an error
+    }
+    return this.items.pop()!; // Use ! to assert that the value is not null/undefined
+  }
+
+  peek(): T | string {
+    if (this.isEmpty()) {
+      return "Empty Stack"; // Or throw an error
+    }
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+
+  size(): number {
+    return this.items.length;
+  }
+
+  printStack(): string {
+    let str: string = "";
+    for (let i = 0; i < this.items.length; i++) {
+      str += this.items[i] + " ";
+    }
+    return str;
+  }
+}

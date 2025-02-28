@@ -6,6 +6,7 @@
 
 - sign msgs
 - where to hold private / public keys (***most important*** easy to install for the end user)
+ - show private key only once
 - conversation req
 - delete account
 - delete msgs
