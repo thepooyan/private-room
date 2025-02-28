@@ -12,6 +12,9 @@ const callbackStore = new CallbackStore()
 
 export const closeModal = () => {
   setOpen(false)
+}
+
+const closeCleanup = () => {
   setTitle("")
   setContet("")
   setState("")
@@ -49,7 +52,7 @@ const Modal = () => {
   return (
     <>
       <AlertDialog open={open()} onOpenChange={setOpen}>
-        <AlertDialogContent class="!w-max">
+        <AlertDialogContent class="!w-max" onanimationend={() => !open() && closeCleanup()}>
           <AlertDialogTitle>{title()}</AlertDialogTitle>
           <AlertDialogDescription>
             <p class="text-center text-md mb-2 mt-3">
