@@ -1,5 +1,6 @@
 # bugs:
 - signup is not smooth all the time
+- modal close 
 
 
 # to add:
@@ -7,7 +8,6 @@
 - sign msgs
 - where to hold private / public keys (***most important*** easy to install for the end user)
 - conversation req
-- if someone messages you, they should show up in conversation requests
 - delete account
 - delete msgs
 
