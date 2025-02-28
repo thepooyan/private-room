@@ -13,7 +13,7 @@ export const useNeedsUser = (returnTo: string = "/Login") => {
 export const useLogout = () => {
   const navigate = useNavigate()
   return () => {
-    user.logout()
     navigate("/Login")
+    user.logout()
   }
 }

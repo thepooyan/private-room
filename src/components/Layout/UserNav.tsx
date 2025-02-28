@@ -47,6 +47,10 @@ const UserNav = () => {
               <span class="text-xs text-zinc-500">Public key: </span>
               <Copyable toCopy={JSON.stringify(u().public_key)}/>
             </p>
+            <p>
+              <span class="text-xs text-zinc-500">Private key: </span>
+              <Copyable toCopy={JSON.stringify(u().private_key)}/>
+            </p>
           </div>
         </div>
         <div class="space-x-2">
