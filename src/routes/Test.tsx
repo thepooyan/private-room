@@ -1,11 +1,16 @@
-import { callModal } from "~/components/modal/Modal"
 import { Button } from "~/components/ui/button"
+import axios from "axios"
+import { user } from "~/utility/signal"
 
 const Test = () => {
 
-  const dos = () => {
-    callModal.success("two")
-    callModal.fail("three")
+  const dos = async  () => {
+    let us= user.signal()
+    if (us) {
+      let a = await axios.post("/api/RequestDeleteAccount", us.public_key)
+      console.log(a)
+    }
+
   }
 
   return (

@@ -50,7 +50,7 @@ export function arrayBufferToBase64(buffer: ArrayBuffer): string {
   for (let i = 0; i < len; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
-  return window.btoa(binary);
+  return Buffer.from(binary, 'binary').toString('base64');
 }
 
 export function base64ToArrayBuffer(base64: string): ArrayBuffer {
