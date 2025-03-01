@@ -1,14 +1,19 @@
 import { Button } from "~/components/ui/button"
 import axios from "axios"
 import { user } from "~/utility/signal"
+import { base64ToArrayBuffer, decryptMessage, importCryptoKey } from "~/utility/crypto"
 
 const Test = () => {
 
   const dos = async  () => {
     let us= user.signal()
     if (us) {
-      let a = await axios.post("/api/RequestDeleteAccount", us.public_key)
-      console.log(a)
+      let res = await axios.post<string>("/api/RequestDeleteAccount", us.public_key)
+      let arrBuff = base64ToArrayBuffer(res.data)
+      let key = await importCryptoKey(JSON.stringify(us.private_key))
+      let decoded = await decryptMessage(key, arrBuff)
+      let result = await axios.post("/api/ConfirmDeleteAccount", decoded)
+      console.log(result)
     }
 
   }

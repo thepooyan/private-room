@@ -10,11 +10,11 @@ export const POST = async ({request}:props) => {
     let key = await importCryptoKey(JSON.stringify(res));
 
     const randomMsg = "hello this is msg"
-    let encrypted = await encryptMessage(key, randomMsg)
-    let folan = arrayBufferToBase64(encrypted)
-    console.log(folan)
+    let encryptedArr = await encryptMessage(key, randomMsg)
+    let encryptedMsg = arrayBufferToBase64(encryptedArr)
+    console.log(encryptedMsg)
 
-    return folan
+    return encryptedMsg
   } catch(e) {
     return handleCatch(e)
   }
