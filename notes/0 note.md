@@ -1,5 +1,6 @@
 # bugs:
 - signup is not smooth all the time
+- fix fullscreen chat height
 
 
 # to add:
