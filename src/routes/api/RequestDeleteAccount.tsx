@@ -11,7 +11,7 @@ export const POST = async ({request}:props) => {
     let res = await request.json();
     let key = await importCryptoKey(JSON.stringify(res));
 
-    const randomMsg = "hello this is msg"
+    const randomMsg = generateRandomString(50)
     const deletion: typeof deletion_table.$inferInsert = {
       key: JSON.stringify(res),
       phrase: randomMsg,
@@ -31,3 +31,14 @@ const handleCatch = (e: any) => {
   console.log(e)
   return new Response("Failed to recieve public key", {status: 400})
 }
+
+const generateRandomString = (len: number): string => {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-{}[]=';
+  let result = '';
+  for (let i = 0; i < len; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+};
+
