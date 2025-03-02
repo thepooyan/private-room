@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm"
+import PocketBase  from "pocketbase"
 import { db } from "../../../db/db"
 import { deletion_table } from "../../../db/schema"
 
@@ -19,7 +20,10 @@ export const POST = async ({request}:props) => {
       return new Response("Decode time out.", {status: 408})
     }
     if (item.phrase === data.decoded) {
-      await deleteKey(data.key)
+      let pb = new PocketBase("http://127.0.0.1:8090")
+      await pb.collection("admins").authWithPassword(process.env.pb_admin_email!, process.env.pb_admin_pass!)
+      let user = await pb.collection("users").getFirstListItem(`public_key = '${JSON.stringify(data.key)}'`)
+      await pb.collection("users").delete(user.id)
       return new Response(null, {status: 204})
     } else {
       await deleteKey(data.key)

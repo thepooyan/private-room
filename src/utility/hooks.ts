@@ -3,6 +3,7 @@ import { user } from "./signal";
 import { createEffect } from "solid-js";
 import { api } from "./backend";
 import { callModal } from "~/components/modal/Modal";
+import { deleteAccount } from "./logic";
 
 export const useNeedsUser = (returnTo: string = "/Login") => {
   const navigate = useNavigate();
@@ -24,12 +25,13 @@ export const useDeleteAccount = () => {
   const logout = useLogout();
 
   return () => {
-    api.users
-      .deleteAccount()
-      .then(logout)
-      .catch((e) => {
-        console.log(e);
-        callModal.fail("Failed to delete your account. Please try again later.");
-      });
+    let us = user.signal()
+    if (us)
+    deleteAccount(us.public_key, us.private_key)
+    .then(logout)
+    .catch(e => {
+      console.log(e)
+      callModal.fail("Something went wrong. Please try again.")
+    })
   };
 };

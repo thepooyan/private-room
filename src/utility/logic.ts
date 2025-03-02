@@ -54,6 +54,5 @@ export const deleteAccount = async (pk: JsonWebKey, prk: JsonWebKey) => {
   let arrBuff = base64ToArrayBuffer(res.data)
   let key = await importCryptoKey(JSON.stringify(prk))
   let decoded = await decryptMessage(key, arrBuff)
-  console.log(decoded)
   return await axios.post("/api/ConfirmDeleteAccount", {key:pk ,decoded:decoded})
 }
