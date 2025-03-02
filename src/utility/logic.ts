@@ -1,10 +1,11 @@
 import { ClientResponseError } from "pocketbase";
-import { exportCryptoKey, generateRSAKeyPair } from "./crypto";
+import { base64ToArrayBuffer, decryptMessage, exportCryptoKey, generateRSAKeyPair, importCryptoKey } from "./crypto";
 import { user } from "./signal";
 import { api } from "./backend";
 import { IlocalUser } from "./interface";
 import { contanctStorage } from "./utility";
 import { reloadContacts } from "~/components/chat/contactList";
+import axios from "axios";
 
 export const createNewUser = async (username: string) => {
   const {publicKey, privateKey} = await generateRSAKeyPair();
@@ -46,4 +47,12 @@ export const addContactsFromApi = async(user: IlocalUser) => {
   let new_contacts = await api.users.findContacts(user)
   new_contacts.forEach(n => contanctStorage.add(n))
   reloadContacts()
+}
+
+export const deleteAccount = async (pk: JsonWebKey, prk: JsonWebKey) => {
+  let res = await axios.post<string>("/api/RequestDeleteAccount", pk)
+  let arrBuff = base64ToArrayBuffer(res.data)
+  let key = await importCryptoKey(JSON.stringify(prk))
+  let decoded = await decryptMessage(key, arrBuff)
+  return await axios.post("/api/ConfirmDeleteAccount", {key:pk ,decoded:decoded})
 }
