@@ -8,7 +8,6 @@
 - where to hold private / public keys (***most important*** easy to install for the end user)
  - show private key only once
 - conversation req
-- delete account
 - delete msgs
 
 - a stats page about all the users of site
@@ -22,3 +21,4 @@
 - get contacts when users logs in 
 - add modal
 - search up user id instead of adding public key manually
+- delete account
