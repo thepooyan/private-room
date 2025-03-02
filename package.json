@@ -13,6 +13,7 @@
     "@tanstack/solid-query": "^5.66.4",
     "@unocss/reset": "^0.65.1",
     "axios": "^1.8.1",
+    "better-sqlite3": "^11.8.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.40.0",
@@ -32,6 +33,7 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
     "@types/bun": "^1.2.4",
     "drizzle-kit": "^0.30.5",
     "sass-embedded": "^1.85.1",

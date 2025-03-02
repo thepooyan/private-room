@@ -12,10 +12,9 @@ const Test = () => {
       let arrBuff = base64ToArrayBuffer(res.data)
       let key = await importCryptoKey(JSON.stringify(us.private_key))
       let decoded = await decryptMessage(key, arrBuff)
-      let result = await axios.post("/api/ConfirmDeleteAccount", decoded)
+      let result = await axios.post("/api/ConfirmDeleteAccount", {key:us.public_key ,decoded:decoded})
       console.log(result)
     }
-
   }
 
   return (
