@@ -14,7 +14,6 @@ export const POST = async ({request}:props) => {
   if (item != undefined) {
     let now = Date.now()
     let elapsed = now - item.date
-    console.log(elapsed)
     if (elapsed > 5000) {
       await deleteKey(data.key)
       return new Response("Decode time out.", {status: 408})
