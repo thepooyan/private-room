@@ -5,7 +5,7 @@ import { currentChat } from "~/utility/signal";
 const Chat = () => {
 
   return (
-    <div>
+    <>
       <Show when={!currentChat()}>
         <div class="flex justify-center items-center h-full">
           Select one contact to continue
@@ -18,7 +18,7 @@ const Chat = () => {
           </>
         )}
       </Show>
-    </div>
+    </>
   );
 };
 
