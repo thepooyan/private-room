@@ -1,7 +1,7 @@
 import { Iuser } from "~/utility/interface";
 import Msg from "./Msg";
 import { api } from "~/utility/backend";
-import { Accessor, createEffect, For, onMount, Show, Suspense } from "solid-js";
+import { Accessor, createEffect, For, Show, Suspense } from "solid-js";
 import { useMutationState } from "@tanstack/solid-query";
 
 interface props {
