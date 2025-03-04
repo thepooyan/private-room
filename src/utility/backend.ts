@@ -67,7 +67,7 @@ export const api = {
       let him = c.id
       return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
     },
-    getAllReactive: (c: Accessor<Iuser>) => {
+    getAllResource: (c: Accessor<Iuser>) => {
       const signal = messageQuery(c)
       return { signal }
     }, 

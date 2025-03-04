@@ -1,23 +1,31 @@
 import { Iuser } from "~/utility/interface";
 import Msg from "./Msg";
 import { api } from "~/utility/backend";
-import { Accessor, For, Show, Suspense } from "solid-js";
+import { Accessor, createEffect, For, onMount, Show, Suspense } from "solid-js";
 import { useMutationState } from "@tanstack/solid-query";
 
 interface props {
   c: Accessor<Iuser>;
 }
 const ChatView = ({ c }: props) => {
-  const { signal } = api.messages.getAllReactive(c);
+  const { signal } = api.messages.getAllResource(c);
+  let scrollRef!: HTMLDivElement;
 
   let variables = useMutationState<string>(()=>({
     filters: {mutationKey: ["mutateMsgs", c().id], status: "pending"},
     select: (mutation) => mutation.state.variables as string
   }))
 
+  createEffect(() => {
+    if (signal.data) {
+      scrollRef.scrollTop = scrollRef.scrollHeight;
+      // scrollRef.scrollTo({top: scrollRef.scrollHeight, behavior: "smooth"})
+    }
+  })
+
   return (
     <Suspense fallback="...">
-      <div class="p-5 px-7 h-1 grow-1 overflow-y-auto ">
+      <div class="p-5 px-7 h-1 grow-1 overflow-y-auto " ref={scrollRef}>
         <Show when={signal?.data}>
           {(ms) => (
             <For each={ms().items}>
