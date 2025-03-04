@@ -18,8 +18,8 @@ const ChatView = ({ c }: props) => {
 
   createEffect(() => {
     if (signal.data) {
-      scrollRef.scrollTop = scrollRef.scrollHeight;
-      // scrollRef.scrollTo({top: scrollRef.scrollHeight, behavior: "smooth"})
+      // scrollRef.scrollTop = scrollRef.scrollHeight;
+      scrollRef.scrollTo({top: scrollRef.scrollHeight, behavior: "smooth"})
     }
   })
 
@@ -28,7 +28,7 @@ const ChatView = ({ c }: props) => {
       <div class="p-5 px-7 h-1 grow-1 overflow-y-auto " ref={scrollRef}>
         <Show when={signal?.data}>
           {(ms) => (
-            <For each={ms().items}>
+            <For each={ms().items.slice().reverse()}>
               {(i) => <Msg isRightSide={i.sender !== c().id}>{i.content}</Msg>}
             </For>
           )}

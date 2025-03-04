@@ -65,7 +65,7 @@ export const api = {
       if (!sig) throw new Error("User not logged in")
       let me = sig.id
       let him = c.id
-      return pb_msg.getList(1, 50, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`})
+      return pb_msg.getList(1, 20, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`, sort: "-created"})
     },
     getAllResource: (c: Accessor<Iuser>) => {
       const signal = messageQuery(c)
