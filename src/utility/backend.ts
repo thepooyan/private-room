@@ -76,7 +76,7 @@ export const api = {
         switch(e.action) {
           case "create":
             qc.setQueryData(["msgs", e.record.sender], (oldldata: ListResult<Imessage> | null) => {
-              return oldldata?.items ? {...oldldata, items: [...oldldata.items, e.record] } : null
+              return oldldata?.items ? {...oldldata, items: [ e.record ,...oldldata.items ] } : null
             })
           break
           case "delete":
