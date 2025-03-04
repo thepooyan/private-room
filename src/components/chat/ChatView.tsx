@@ -17,7 +17,7 @@ const ChatView = ({ c }: props) => {
 
   return (
     <Suspense fallback="...">
-      <div class="p-5 px-7 overflow-auto h-90 ">
+      <div class="p-5 px-7 h-1 grow-1 overflow-y-auto ">
         <Show when={signal?.data}>
           {(ms) => (
             <For each={ms().items}>
