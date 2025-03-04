@@ -60,12 +60,12 @@ export const api = {
         content: content
       })
     },
-    getAll: (c: Iuser) => {
+    getPage: (c: Iuser, pageInation = 1) => {
       let sig = user.signal()
       if (!sig) throw new Error("User not logged in")
       let me = sig.id
       let him = c.id
-      return pb_msg.getList(1, 20, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`, sort: "-created"})
+      return pb_msg.getList(pageInation, 20, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`, sort: "-created"})
     },
     getAllResource: (c: Accessor<Iuser>) => {
       const signal = messageQuery(c)
@@ -93,7 +93,7 @@ export const api = {
 export const messageQuery = (contact: Accessor<Iuser>) => {
   return createQuery(() => ({
     queryKey: ["msgs", contact().id],
-    queryFn: () => api.messages.getAll(contact()),
+    queryFn: () => api.messages.getPage(contact()),
     staleTime: 2000
   }))
 }

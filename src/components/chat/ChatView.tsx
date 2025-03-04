@@ -1,7 +1,7 @@
 import { Iuser } from "~/utility/interface";
 import Msg from "./Msg";
 import { api } from "~/utility/backend";
-import { Accessor, createEffect, For, Show, Suspense } from "solid-js";
+import { Accessor, createEffect, For, onMount, Show, Suspense } from "solid-js";
 import { useMutationState } from "@tanstack/solid-query";
 
 interface props {
@@ -20,6 +20,12 @@ const ChatView = ({ c }: props) => {
     if (signal.data) {
       // scrollRef.scrollTop = scrollRef.scrollHeight;
       scrollRef.scrollTo({top: scrollRef.scrollHeight, behavior: "smooth"})
+    }
+  })
+
+  onMount(() => {
+    scrollRef.onscroll = () => {
+      if (scrollRef.scrollTop === 0) console.log("hey")
     }
   })
 
