@@ -1,4 +1,4 @@
-import { createMutation, createQuery, QueryClientConfig } from "@tanstack/solid-query"
+import { createMutation, QueryClientConfig } from "@tanstack/solid-query"
 import { Iuser } from "./interface"
 import { api } from "./backend"
 import { qc } from "~/app"
@@ -9,8 +9,9 @@ export const queryConfig:QueryClientConfig = {
     queries: {
       gcTime: 1000 * 60 * 5, // 5 min
       staleTime: Infinity,
+      experimental_prefetchInRender: true
     }
-  }
+  },
 }
 
 export const messagesMutation = (to: Accessor<Iuser>) => {

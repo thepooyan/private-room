@@ -67,9 +67,18 @@ export const api = {
       let him = c.id
       return pb_msg.getList(pageInation, 20, {filter: `(sender = "${me}" && reciever = "${him}") || (sender = "${him}" && reciever = "${me}")`, sort: "-created"})
     },
-    getAllResource: (c: Accessor<Iuser>) => {
-      const signal = messageQuery(c)
-      return { signal }
+    getInitialQuery: (c: Accessor<Iuser>) => {
+      return createQuery(() => ({
+        queryKey: ["msgs", c().id],
+        queryFn: () => api.messages.getPage(c()),
+        staleTime: 2000
+      }))
+    }, 
+    getPageQuery: (c: Accessor<Iuser>, page: number) => {
+      return createQuery(() => ({
+        queryKey: ["msgs", c().id, page],
+        queryFn: () => api.messages.getPage(c(), page),
+      }), ()=>qc)
     }, 
     subscribeUser: (user: IlocalUser) => {
       return pb_msg.subscribe("*", e => {
@@ -88,12 +97,4 @@ export const api = {
       return pb_msg.unsubscribe("")
     }
   }
-}
-
-export const messageQuery = (contact: Accessor<Iuser>) => {
-  return createQuery(() => ({
-    queryKey: ["msgs", contact().id],
-    queryFn: () => api.messages.getPage(contact()),
-    staleTime: 2000
-  }))
 }
